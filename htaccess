@@ -36,3 +36,9 @@ Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsaf
 Header set Access-Control-Allow-Origin "*"
 Header set Content-Security-Policy "font-src 'self' https://cdn.jsdelivr.net data:;"
 
+<FilesMatch "\.(json|js)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</FilesMatch>
+
