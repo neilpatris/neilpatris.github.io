@@ -64,18 +64,26 @@ $(document).ready(function(){
             }
 
             // Assets & Resources
-            if (project.assets_resources) {
+            if (
+                project.assets_resources &&
+                Object.values(project.assets_resources).some(value => value.trim() !== "")
+            ) {
                 contentHTML += `<h3>Assets & Resources</h3><ul>`;
+
                 for (const [key, value] of Object.entries(project.assets_resources)) {
-                    let formattedValue = value.replace(
-                        /(https?:\/\/[^\s,]+)/g, 
-                        ' <a href="$1" target="_blank">Lien</a> )'
+                    if (value.trim() === "") continue;
+
+                    const formattedValue = value.replace(
+                        /(https?:\/\/[^\s,]+)/g,
+                        ' <a href="$1" target="_blank">Lien</a>'
                     );
 
                     contentHTML += `<li><strong>${key.replace("_", " ")}:</strong> ${formattedValue}</li>`;
                 }
+
                 contentHTML += `</ul>`;
-            }
+}
+
 
             $("#project-description").html(contentHTML);
 
