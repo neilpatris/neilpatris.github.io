@@ -1,0 +1,250 @@
+/* ==============================
+              Filter Bar 
+================================= */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: var(--third-color);
+  width: 30%;
+  margin: 20px auto;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: 60px;
+}
+
+.filter-btn img {
+  width: 40px;
+  height: 40px;
+  filter: invert(1);
+  pointer-events: none;
+}
+
+.filter-btn:focus,
+.filter-btn:active {
+  outline: none;
+}
+
+.filter-text {
+  font-size: 12px;
+  color: var(--first-color);
+  margin-top: 5px;
+}
+
+.filter-btn:hover object {
+  transform: scale(1.2);
+}
+
+.filter-btn[data-filter="all"] {
+  background-color: var(--second-color);
+  padding: 10px;
+  border-radius: 5px;
+  width: 50px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-btn[data-filter="all"] .filter-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--first-color);
+  line-height: 1;
+}
+
+.filter-btn.active {
+  background-color: var(--fourth-color);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/* ==============================
+                Main 
+================================= */
+.main {
+  display: flex;
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.main.loading {
+  opacity: 0.3;
+}
+
+.skewed p, small {
+  color: var(--first-color);
+}
+
+.skewed p {
+  font-size: 0.9em;
+  line-height: 23px;
+}
+
+.skewed h1 {
+  margin: 0;
+  color: var(--first-color);
+  font-size: 30px;
+}
+
+.skewed {
+  width: 45em;
+  display: flex;
+  background: var(--second-color);
+  margin: 2em 0;
+  box-shadow: 0 0 15px rgb(0, 0, 0, 0.7);
+}
+
+.skewed .text {
+  padding: 1.5em;
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.skewed a {
+  color: var(--first-color);
+  text-decoration: none;
+}
+
+.skewed .image {
+  width: 50%;
+  height: 17em;
+  position: relative;
+  overflow: hidden;
+}
+
+.skewed .image::before {
+  content: '';
+  position: absolute;
+  left: -6.1em;
+  top: 50%;
+  transform: translateY(-50%) rotate(20deg);
+  background: var(--second-color);
+  width: 40%;
+  height: 140%;
+  box-shadow: 0 0 20px rgb(0, 0, 0, 0.7);
+}
+
+.skewed-left .image::before {
+  transform: translateY(-50%) rotate(-20deg);
+  left: initial;
+  right: -6.1em;
+}
+
+.skewed img {
+  width: 140%;
+}
+
+/* ==============================
+       Responsive Design 
+================================= */
+
+@media screen and (max-width: 1200px) {
+  .skewed {
+      width: 80%;
+  }
+  
+}
+
+@media screen and (max-width: 768px) {
+  .filter-bar {
+      width: 40%;
+      flex-wrap: wrap;
+      gap: 5px;
+  }
+
+  .filter-btn {
+      min-width: 45px;
+      font-size: 10px;
+  }
+
+  .skewed {
+      width: 70%;
+      margin: 1em 0;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .skewed h1 {
+      font-size: 24px;
+  }
+
+  .skewed p {
+      font-size: 0.8em;
+  }
+
+  .skewed .image {
+      height: auto;
+      width: 100%;
+  }
+
+  .skewed .text {
+    width: 100%;
+  }
+
+  .skewed .image::before {
+      display: none;
+  }
+
+  .skewed .image img {
+    width: 100%;
+  }
+
+  .navbar-nav {
+      flex-direction: column;
+      text-align: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .filter-bar {
+      flex-direction: column;
+      width: 40%;
+      padding: 5px;
+  }
+
+  .filter-btn {
+      width: 100%;
+      padding: 8px;
+  }
+
+  .skewed {
+      width: 70%;
+      padding: 10px;
+  }
+
+  .skewed .text {
+      padding: 1em;
+  }
+
+  .skewed h1 {
+      font-size: 20px;
+  }
+
+  .skewed p {
+      font-size: 0.75em;
+  }
+}

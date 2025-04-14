@@ -1,0 +1,70 @@
+/* ==============================
+                Main 
+=================================
+*/
+.heading {
+    width: 100%;
+    background-color: var(--second-color);
+    color: var(--first-color);
+}
+
+.header-title {
+    font-size: 30px;
+    font-weight: normal;
+    margin-top: 3vh;
+}
+
+.header-main {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.heading .btn {
+    color: var(--first-color);
+    border-color: var(--first-color);
+}
+
+.container strong {
+    font-weight: bold;
+}
+
+.custom-shape-divider-top-1711280432 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    margin-bottom: 30px;
+}
+
+.custom-shape-divider-top-1711280432 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 100px;
+}
+
+.custom-shape-divider-top-1711280432 .shape-fill {
+    fill: var(--second-color);
+}
+
+.ratio-16x9 {
+  max-width: 700px; 
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .header-title {
+        font-size: 24px;
+    }
+  
+    .header-main {
+        font-size: 18px;
+    }
+  
+    .ratio-16x9 {
+        max-width: 300px; 
+        margin: 0 auto;
+    }
+  }
+  

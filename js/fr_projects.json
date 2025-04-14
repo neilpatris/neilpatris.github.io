@@ -1,0 +1,463 @@
+[
+  {
+    "id": "procedural-dungeon-generator-flower",
+    "title": "Générateur de donjon procédural (WIP)",
+    "engine": "Unity",
+    "categories": [
+      "Unity",
+      "Personal project"
+    ],
+    "pitch": "Dans le but de créer un rogue-lite avec un groupe d'étudiants, j'ai commencé ce projet pour permettre la création d'un donjon procédural en 3D dans Unity.",
+    "project_info": {
+      "team_size": "Solo",
+      "development_time": "2 semaines",
+      "engine": "Unity",
+      "role": "Gameplay Programmer"
+    },
+    "about_project": [
+      "Ce projet est développé dans le cadre d’une production étudiante pour créer un jeu de type rogue-lite et de gestion. L’objectif de ce projet est de développer un générateur de donjon en 3D dans Unity. Le donjon est créé de manière aléatoire lorsque le joueur décide d’explorer les profondeurs. J’ai conçu le donjon de manière modulaire, en commençant par les salles principales et en ajoutant des salles secondaires reliées par des couloirs.",
+      "Je voulais qu’il soit modulaire et facilement paramétrable dans l’éditeur si notre équipe décide de modifier certains points. J'ai utilisé un système basé sur des Prefabs de salles et de connecteurs, qui sont automatiquement alignés par des points de connexion appelés Doors.",
+      "J’ai également créé une interface personnalisée du script dans l’inspecteur Unity pour gérer tous les paramètres du générateur. Cela m’a permis de mieux organiser le travail et de rendre l’outil plus agréable à utiliser pour mon équipe.",
+      "Ce projet a vocation à s’améliorer au fur et à mesure de son avancement afin d’avoir un outil parfait pour notre équipe et notre projet."
+    ],
+    "development": {
+      "Système de portes dynamiques": [
+        "Avant de créer des salles, j’ai développé un système pour positionner automatiquement les portes de chacune d’entre elles sur les emplacements disponibles. Pour ce faire, j’ai utilisé un programme appelé RoomSnapper, qui examine les Colliders du sol pour en déterminer les bords externes. Le script fonctionne également si l’on a plusieurs GameObject représentant le sol. Après avoir récupéré les bords, un autre programme, appelé « DoorSnapper », veille à ce que chaque porte soit parfaitement alignée avec une bordure (en la disposant sur l’Edge la plus proche), qu’elle soit orientée vers l’extérieur, qu’elle n’entre pas en collision avec un mur, et qu’elle ne se trouve pas trop près d’une autre porte. Ce système m'assure que toutes les portes sont prêtes à relier pour connecter des salles entre elles et évite beaucoup de problèmes lors de la génération du donjon."
+      ],
+      "Génération des salles principales": [
+        "Après avoir installé les portes, j’ai entamé la création du chemin principal du donjon en utilisant une structure de pile (Stack) pour faciliter la récupération de la dernière salle en cas de collision. J’ai commencé par positionner la première salle à l’origine (Vector3.zero). Ensuite, pour chaque nouvelle salle, j’ai choisi une porte disponible dans la salle précédente, j’y ai ajouté un connecteur, puis j’ai aligné la nouvelle salle sur ce connecteur. Je répète ce processus jusqu’à obtenir le nombre de salles voulu pour le donjon (paramétrable). La dernière salle sur le chemin principal est toujours une salle finale choisie à partir d’une liste spécifique de Prefabs."
+      ],
+      "Génération des salles secondaires": [
+        "Une fois que toutes les salles principales sont en place, je parcours la pile de salles principales à l'envers afin de parcourir de la première salle à la dernière. Pour chaque salle, je vérifie s'il y a des portes disponibles pour attacher des salles secondaires.",
+        "Le processus est le suivant, je choisis une porte libre et y connecte une salle en utilisant un connecteur. Je répète cette action un nombre de fois aléatoire, qui peut être ajusté dans le panneau de contrôle, entre deux valeurs prédéfinies. Il me reste une tâche inachevée : quand des pièces annexes possèdent plusieurs entrées, elles ne formeront qu’un seul itinéraire alternatif."
+      ],
+      "Placement intelligent et résolution des collisions": [
+        "Chaque fois que j’essaie de placer une salle ou un connecteur, je vérifie qu’il n’y a pas d’espace occupé en utilisant un Physics.OverlapBox. Cette partie n’est pas encore terminée, car elle présente certains challenges et je continue de la développer. Pour l’instant, si une collision est détectée lors du placement d’un nouveau connecteur instancié ou d’une nouvelle salle instanciée, je supprime l’élément et je l’enlève également de la pile. Ensuite, je supprime la toute dernière salle et la remplace par une salle finale. Le problème de ce système est qu’il ne respecte pas le nombre de salles principales défini dans l’éditeur du script. C’est pour cette raison que je m’en occupe. Pour les salles secondaires, c’est moins dérangeant."
+      ],
+      "Interface d’édition personnalisée": [
+        "J’ai également développé une interface personnalisée pour le script, ce qui me permet de tout gérer en un seul endroit et d’ajuster la génération de donjons directement dans l’éditeur d'Unity. Dans cet outil, vous pouvez spécifier la liste des préfabriqués pour les salles de base, les salles finales et les connecteurs. Il est crucial d’utiliser le bouton « Process All Room Prefabs » avant d’utiliser le donjon, surtout lorsque vous créez de nouvelles salles ou des connexions. Ce bouton permet de positionner et de créer les portes.  Ensuite, il faut définir les conteneurs où vont se placer les salles et les connecteurs. Pour finir, les paramètres de génération du donjon sont les plus importants. Ils incluent la taille du donjon, définie par le nombre de salles principales et le nombre de salles secondaires, situées entre deux valeurs. Cette interface me permet de tester différentes configurations très rapidement."
+      ],
+      "Défis techniques": [
+        "Le placement intelligent des portes a représenté l’un des plus gros défis. Je devais jouer avec les bordures du mesh ou des meshs du sol, éviter les zones bloquées par les murs, orienter automatiquement les portes et gérer tous les cas particuliers où une porte ne pouvait pas être placée. La disposition des salles du donjon selon leurs portes a également constitué un défi. J’ai réfléchi à plusieurs approches et j’ai choisi le système de pile, qui me semblait être la meilleure option dans ma situation. Finalement, le dernier défi qui me pose encore problème est la résolution des collisions entre les salles et les connecteurs. J'y ai travaillé dessus pour améliorer de jour en jour l'outil."
+      ]
+    },
+    "assets_resources": {},
+    "links": [
+      {}
+    ],
+    "images": [
+      "img/dungeonGenerateEx1.png",
+      "img/dungeonGenerateEx2.png",
+      "img/dungeonGenerateEx3.png",
+      "img/dungeonGenerateInterface.png"
+    ],
+    "videos": []
+  },
+  {
+    "id": "luge-game-controller",
+    "title": "Sled the Hill",
+    "engine": "Unreal Engine",
+    "categories": [
+      "Unreal Engine",
+      "Academic Project"
+    ],
+    "pitch": "C’est un jeu d’arcade Endless Runner où l’on contrôle une personne sur une luge qui glisse sur une piste de ski. Le but est d’aller le plus loin possible tout en évitant les obstacles pour obtenir le meilleur score.",
+    "project_info": {
+      "team_size": "4",
+      "development_time": "4 jours",
+      "engine": "Unreal Engine",
+      "role": "Gameplay Programmer & Leader"
+    },
+    "about_project": [
+      "Ce projet académique m’a permis de concevoir un contrôleur alternatif et de créer un jeu pour ce contrôleur à l’aide d’Unreal Engine. Il est constitué de deux cordes attachées à un joystick caché, une à droite et une à gauche, que le joueur doit tirer pour faire avancer une luge sur une piste de ski.",
+      "Le défi principal du projet consistait à créer une piste infinie générée procéduralement et dont la difficulté augmente progressivement. Étant donné que j’étais le seul prog, j'ai géré tous les aspects de la programmation du jeu, y compris les mécaniques, la génération d'obstacles procéduraux et l'interface utilisateur. Pendant ce temps, le reste de mon équipe s’est concentré sur l'aspect artistique du jeu et sur l'amélioration du contrôleur physique."
+    ],
+    "development": {
+      "Conception du contrôleur": [
+        "Au début de notre projet, nous avons examiné plusieurs concepts de contrôleurs alternatifs et avons finalement opté pour un système physique qui évoque une luge. Le contrôleur a été construit en carton équipé de cordes de chaque côté et attachées à un joystick d'arcade. En tirant sur les cordes, le joueur pouvait se déplacer vers la gauche ou vers la droite. De multiples itérations ont été nécessaires pour polir la sensibilité dans le jeu, de solidifier la structure en carton de la luge et de rendre fonctionnel le contrôleur alternatif."
+      ],
+      "Génération de pistes procédurales": [
+        "L’un de mes plus grands défis techniques a été de concevoir une piste de ski infinie générée procéduralement. Pour y parvenir, j’ai mis en place un système de blocs de pistes de ski réutilisables : une fois que le joueur dépasse un bloc, celui-ci est repositionné à l’avant de la piste. Ce mécanisme permet de créer un effet d’infini, mais aussi d’optimiser les performances en évitant de garder des blocs inutiles. J’ai également développé un système de génération aléatoire d’obstacles sur ces blocs, avec une difficulté progressive : plus le joueur avance, plus les obstacles deviennent nombreux."
+      ],
+      "Simulation glissante et gestion de la vitesse": [
+        "Pour avoir une sensation de glisse, j’ai implémenté un modèle de vitesse progressive. Plus le joueur parcourt de distance, plus la luge accélère. Cela permet également d’augmenter la difficulté du jeu et pousse le joueur à chuter. Le nombre d’obstacles augmente lui aussi en fonction de la distance."
+      ],
+      "Interface utilisateur et feedbacks": [
+        "L'interface utilisateur a été conçue pour fournir des informations claires et pertinentes tout au long du jeu. Un compteur de distance en temps réel permet aux joueurs de suivre leur progression, qui sert également de score final dans le tableau de classement. Pour rendre plus immersif le jeu, nous avons décidé de mettre des effets visuels, tels que des chutes de neige, et les artistes ont créé un environnement hivernal de piste de ski, de montagne…"
+      ]
+    },
+    "assets_resources": {
+      "Animations": "Le Rigging du personnage et l'animation du personnage viennent de Mixamo."
+    },
+    "links": [
+      {
+        "text": "Game Build",
+        "url": "https://coloneil.itch.io/arcade-sledding-game"
+      }
+    ],
+    "images": [
+      "img/LugeGame01.png",
+      "img/LugeGame01.png",
+      "img/LugeGame02.png"
+    ],
+    "videos": [
+      "https://www.youtube.com/watch?v=RSnl94IKGC4",
+      "https://youtube.com/shorts/rtisT-_VF3U"
+    ]
+  },
+  {
+    "id": "mini-golf-unreal",
+    "title": "Mini-Golf Arcade",
+    "engine": "Unreal Engine",
+    "categories": [
+      "Unreal Engine",
+      "Academic Project"
+    ],
+    "pitch": "C’est un jeu d’arcade de Mini-Golf. Le but du jeu est donc de mettre la balle dans le trou avec le moins de coups possible. Le temps est compté ainsi que les coups. Si deux tentatives ont le même nombre de coups, la plus rapide est mieux classée.",
+    "project_info": {
+      "team_size": "Solo",
+      "development_time": "1 semaine",
+      "engine": "Unreal Engine",
+      "role": "Gameplay Programmer"
+    },
+    "about_project": [
+      "Ce projet académique consistait à développer un jeu de mini-golf en solo avec un système de classement personnel. L’objectif de ce projet était de me perfectionner en Blueprint notamment l’utilisation des Event Dispatchers. J’ai également beaucoup appris sur le polish de la physique d'une balle."
+    ],
+    "development": {
+      "Mécanique de gameplay": [
+        "Le joueur peut régler la puissance de son tir avant de frapper la balle. La balle a été pensée pour qu’elle ressemble au plus à une physique de balle simple de mini-golf. Ce n’est pas parfait, mais j’ai fait le maximum dans le timing court que j’avais. Pour aider à la planification des coups, j'ai mis en place un système de tracé de ligne pour prédire la trajectoire de la balle, ce qui permet au joueur d'anticiper le mouvement avant de frapper."
+      ],
+      "Event Dispatchers": [
+        "J’ai choisi d’intégrer un Event Dispatcher au moment où le joueur termine un niveau. Ce dernier est appelé une fois que la balle tombe dans le trou, ce qui entraine plusieurs évènements simultanés, comme l’affichage du résumé du score pour ce level, ainsi que l’arrêt de la balle."
+      ],
+      "Système de classement": [
+        "Le score du joueur est déterminé par le nombre de coups qu’il a effectué pour terminer un trou, en cas d'égalité, le temps est comparé. J’ai aussi implémenté un système de sauvegarde pour stocker et afficher les meilleurs scores personnels du joueur."
+      ],
+      "Interface utilisateur et feedbacks": [
+        "J’ai implémenté une interface UI pour pouvoir visualiser rapidement ses meilleurs scores et choisir quel trou le joueur veut faire. Un résumé des différents meilleurs scores est aussi disponible. À la fin du trou, un récapitulatif, du score sur la dernière tentative est affiché. Pour les feedbacks, j’ai ajouté un effet sonore lorsqu’on frappe la balle."
+      ]
+    },
+    "assets_resources": {
+      "Modèles et textures": "Assets des décors provient de Megascan.",
+      "Matériaux et HDR": "Extrait des bibliothèques en ligne."
+    },
+    "links": [
+      {
+        "text": "Game Build",
+        "url": "https://coloneil.itch.io/arcade-mini-golf"
+      }
+    ],
+    "images": [
+      "img/minigolf.png"
+    ],
+    "videos": [
+      "https://www.youtube.com/watch?v=98MgNcpEyvw"
+    ]
+  },
+  {
+    "id": "3d-platformer-deathrun",
+    "title": "3D Platformer DeathRun",
+    "engine": "Unreal Engine 5",
+    "categories": [
+      "Unreal Engine",
+      "Academic Project"
+    ],
+    "pitch": "Le but de ce jeu de plateforme 3D Deathrun est simple : atteindre la fin du niveau sans tomber, éviter les pièges et ne pas se faire écraser par la boule piquante géante qui vous poursuit.",
+    "project_info": {
+      "team_size": "Solo",
+      "development_time": "1 semaine",
+      "engine": "Unreal Engine 5",
+      "role": "Gameplay Programmer"
+    },
+    "about_project": [
+      "L'objectif de ce projet académique était de recréer les mécaniques d'un jeu de plateforme. C'était aussi un moyen de mettre en pratique mes premiers cours sur Unreal Engine à travers un vrai projet. Pour cela, je me suis inspiré des jeux Crash Bandicoot et de Fall Guys pour créer un jeu de plateforme rapide avec divers pièges statiques et dynamiques, des plateformes mobiles, des sauts précis, des rebonds, etc..."
+    ],
+    "development": {
+      "Personnage et contrôle": [
+        "Pour le personnage et les animations, j'ai mis en place une State Machine pour gérer correctement les animations avec les valeurs et leurs transitions entre elles de mon BP_Character. Pour les contrôles, j'ai utilisé un Mapping Context, et j'ai positionné une caméra à la troisième personne."
+      ],
+      "Mécanique de gameplay": [
+        "J'ai ajouté plusieurs mécaniques pour rendre le jeu plus intéressant. Il y a des pièges statiques qui s'activent en utilisant les Timelines pour jouer une légère animation de mouvement ou les Box Collisions d'Unreal. J’ai mis aussi des plateformes mobiles et une balle piquante géante qui poursuit le joueur utilisant le Component InterpToMovement pour définir les points de passage de celles-ci. J'ai également ajouté un tapis roulant qui pousse le joueur en utilisant un Actor Offset et un Dynamic Materials pour améliorer l'aspect visuel, des sauts précis qui nécessitent un bon timing, des trampolines et des caisses destructibles qui vous ralentissent lorsque vous les percutez. Ensuite, j’ai placé une zone de glace où la friction est à 0 et le joueur glisse tout en esquivant les pièges. Enfin, la porte de sortie s'ouvre avec un levier à activer, ce qui ajoute un petit élément de puzzle au jeu."
+      ],
+      "Interface utilisateur et son": [
+        "L'interface est simple, mais efficace : un menu principal, un menu de pause et un écran de fin. Une barre de santé donne au joueur sa vie. La vie du joueur est très faible et donc le jeu est très punitif mais il est possible de ne pas se faire one shot pour certains pièges. Pour le son, j'ai ajouté des feedbacks audios lorsqu’on se prend un piège ou une caisse afin de comprendre les pièges qui nous ont touchés. J’ai également mis une musique de fond dynamique lors de la course du joueur."
+      ],
+      "Level Design": [
+        "Pour le level design, j’ai commencé par créer des blocs représentant les pièges que je voulais inclure et leur place dans la course. J’ai ensuite ajouté des pièges plus petits et des plateformes pour les relier. Le but est de créer une course tout en étant précis. Le niveau n'est vraiment pas facile pour les débutants, mais pour les joueurs expérimentés, il offre un bon challenge."
+      ]
+    },
+    "assets_resources": {
+      "Animations": "Le Rigging du personnage et l'animation du personnage viennent de Mixamo.",
+      "Environnement_assets": "J'ai utilisé le « Ultimate Platformer Pack » de Quaternius. (https://quaternius.itch.io/ultimate-platformer-pack)"
+    },
+    "links": [
+      {
+        "text": "Game Build",
+        "url": "https://coloneil.itch.io/3d-platformer-deathrun"
+      }
+    ],
+    "images": [
+      "img/projet2UE5Platformer.png"
+    ],
+    "videos": [
+      "https://www.youtube.com/watch?v=LatNLAlD0_I"
+    ]
+  },
+  {
+    "id": "2d-platformer-unity",
+    "title": "2D Platformer",
+    "engine": "Unity",
+    "categories": [
+      "Unity",
+      "Academic Project"
+    ],
+    "pitch": "C’est un Plateformer en 2D inspiré de Super Mario Bros et Super Meat Boy, où le joueur doit progresser à travers les niveaux piégés en maîtrisant le Wall Jump et la propulsion aérienne.",
+    "project_info": {
+      "team_size": "Solo",
+      "development_time": "12 jours",
+      "engine": "Unity",
+      "role": "Gameplay Programmer"
+    },
+    "about_project": [
+      "Ce projet académique avait pour objectif de créer un jeu de plateforme en 2D dans Unity, mais avec une contrainte particulière : ne pas utiliser le moteur physique intégré à Unity. C'était aussi un moyen de mettre en pratique mes premiers cours sur Unity à travers un vrai projet.",
+      "Dans ce projet, je me suis focus sur les mécaniques du personnage, notamment le saut ainsi que le Wall Jump qui est une mécanique principale du projet. J’ai aussi implémenté une mécanique de propulsion d’air pour élever le joueur dans les airs, ainsi que d'autres mécaniques. Enfin, j’ai dû aussi assurer la transition d’un niveau à l’autre tout en gardant certaines données du joueur."
+    ],
+    "development": {
+      "Mécanique de gameplay": [
+        "Tout le gameplay du jeu a été créé entièrement sans les forces physiques d’Unity. Pour cela, j’ai utilisé des Raycasts pour détecter l’environnement autour du personnage. J’ai implémenté le Wall Jump à l’aide de Raycasts qui permettent de détecter les murs et d’autoriser un saut supplémentaire lorsque le joueur est en contact avec un mur. La deuxième mécanique principale du jeu que j’ai développé a été la propulsion aérienne. Je l’ai créée pour qu’elle modifie directement la position du personnage afin de l’élever dans les airs et recréer un effet de flottement. D’autres mécaniques de pièges ont été implémentées, comme des piques qui sortent du sol toutes les 2 secondes, des scies, des plateformes tombantes …"
+      ],
+      "Contrôleur de personnage personnalisé": [
+        "Le personnage est entièrement géré par un script central, CharacterController2D, qui est conçu pour séparer les responsabilités : les entrées de l’utilisateur, les mécaniques de mouvement, les collisions, les animations et la gestion de la vie. Cette organisation m’a permis d'ajouter plus facilement de nouvelles fonctionnalités sans modifier le contrôleur principal."
+      ],
+      "Transition de niveau and Checkpoints": [
+        "Le jeu comporte deux niveaux avec des transitions fluides, tout en conservant les paramètres spécifiques du joueur. J’ai mis en place un système de checkpoints pour permettre au joueur de respawn après un échec, en utilisant « PlayerPrefs » pour mémoriser les positions, garder les données importantes du personnage et empêcher les réinitialisations lors des changements de scène."
+      ],
+      "Défis techniques": [
+        "Le plus gros défi technique que j’ai eu a été le Wall Jump. Sans moteur physique, il a fallu que je trouve une méthode stable basée uniquement sur des Raycasts pour gérer le reset de saut et la direction. Le système de checkpoints a aussi nécessité pas mal de réflexion. J’ai dû faire en sorte que les checkpoints ne puissent pas être activés plusieurs fois quand on passe dedans et que la progression du joueur soit bien conservée entre les niveaux."
+      ]
+    },
+    "assets_resources": {
+      "Personnage": "Ethan the Hero (https://assetstore.unity.com/packages/2d/characters/ethan-the-hero-237992)",
+      "Environnement": "2D Pixel Art Platformer Biome - Plains (https://assetstore.unity.com/packages/2d/environments/2d-pixel-art-platformer-biome-plains-255002)"
+    },
+    "links": [
+      {
+        "text": "Game Build",
+        "url": "https://coloneil.itch.io/2d-platformer"
+      }
+    ],
+    "images": [
+      "img/firstplatformer2D.png"
+    ],
+    "videos": [
+      "https://www.youtube.com/watch?v=VQ_ed4mqN3g"
+    ]
+  },
+  {
+    "id": "tower-defense-unreal",
+    "title": "Tower Defense en C++",
+    "engine": "Unreal Engine",
+    "categories": [
+      "Unreal Engine",
+      "Academic Project"
+    ],
+    "pitch": "Un jeu de Tower Defense dans lequel le joueur doit défendre son château contre des vagues d’ennemis en plaçant stratégiquement des tourelles. Chaque tourelle a ses propres caractéristiques, et il faut bien gérer ses ressources pour tenir face aux assauts répétés.",
+    "project_info": {
+      "team_size": "Solo",
+      "development_time": "1 semaine",
+      "engine": "Unreal Engine",
+      "role": "Gameplay Programmer"
+    },
+    "about_project": [
+      "Ce projet académique avait pour but de créer un Tower Defense sur Unreal Engine en utilisant du C++. Ce projet m’a permis d’apprendre le C++ sur Unreal Engine et de perfectionner mes connaissances sur son utilisation.",
+      "J’ai écrit en C++ le code de toutes les tourelles du jeu, en veillant à ce que chacune ait des caractéristiques uniques : portée, puissance de feu, cadence de tir, etc. Pour les ennemis, j’ai utilisé un système de pathfinding pour qu’ils suivent le chemin jusqu’au château.",
+      "Pour le joueur, afin de voir d’en haut sa stratégie, j’ai mis une caméra Top Down se déplaçant avec ZQSD. J’ai créé également un système de point & click lui permettant d’interagir avec le jeu et d’acheter des tourelles à des endroits précis, tout en gérant son économie pour optimiser sa défense au fil des vagues."
+    ],
+    "development": {
+      "Mécanique de gameplay": [
+        "Dans un Tower Defense, l’élément principal est l’installation de défenses, qui sont des tourelles. Pour le placement des défenses, j’ai créé une mécanique de point & click pour interagir avec l’emplacement de tourelle vide et pouvoir acheter une nouvelle tourelle. Pour les tourelles, le fonctionnement principal a été fait en C++. J’ai mis en place un système de vagues d’ennemis qui permet de faire monter la difficulté petit à petit."
+      ],
+      "IA ennemie et pathfinding": [
+        "J'ai structuré le projet autour d’un système de pathfinding prédéfini que les ennemis suivent. Chaque type d’ennemi peut emprunter un chemin différent et certains peuvent même accéder à des raccourcis interdits pour d’autres. Pour faire cela, j’ai utilisé plusieurs « NavModifierVolume » afin de restreindre l'accès de certains chemins à certains types d’ennemis. Chaque type d'ennemi a un comportement spécifique, certains étant plus rapides et/ou plus résistants."
+      ],
+      "Développement C++": [
+        "Le développement des tourelles en C++ a clairement été un des points qui m’a fait progresser. Pour créer ces défenses, j’ai créé un Blueprint Actor qui prend en Parent Class l’Actor C++ de ma tourelle. Voici comment le script fonctionne: pour commencer, je récupère les composants du Mesh et de la sphere Collision déjà présents dans la scène. Le type de tourelle (simple, explosive...) détermine ses stats : dégâts, portée et mesh. À chaque frame, si une cible est détectée dans la sphere Collision, la tourelle s’oriente vers elle et tire selon un cooldown."
+      ],
+      "Interface utilisateur et feedbacks": [
+        "J’ai affiché la vie du château dans le coin supérieur gauche de l’écran, j’ai voulu changer d’un style de barre de vie classique et j’ai opté pour un château qui change de couleur, jusqu’à devenir tout noir quand c’est perdu. J’ai bien sûr ajouté sur chaque ennemi une barre de vie juste au-dessus de leur tête. Pour la gestion des tourelles, j’ai créé un menu d’achat interactif en cliquant sur un emplacement vide, afin de choisir quelle tourelle le joueur veut acheter en fonction des ressources qu’il dispose."
+      ],
+      "Défis techniques": [
+        "L’un des plus gros défis que j’ai eus sur ce projet a été de mettre en place le pathfinding : il fallait que les ennemis suivent le bon trajet, tout en prenant en compte des statistiques comme la vitesse ou les points de vie. Le deuxième point technique a été bien sûr le développement des tourelles en C++. Je dirais que ce n’est pas la complexité du contenu qui m’a posé problème, mais plutôt le manque de temps."
+      ]
+    },
+    "assets_resources": {
+      "Environnement": "KayKit Medieval Hexagon Pack (https://kaylousberg.itch.io/kaykit-medieval-hexagon?download) and Low Poly Pack Forest (https://jaks.itch.io/lowpolyforestpack?download)",
+      "Towers": "Lindou Tower Defense Pack (https://lindou.itch.io/tower-defens)"
+    },
+    "links": [
+      {
+        "text": "Game Build",
+        "url": "https://coloneil.itch.io/tower-defense-c"
+      }
+    ],
+    "images": [
+      "img/towerdefense.png",
+      "img/towerdefense2.png"
+    ],
+    "videos": []
+  },
+  {
+    "id": "tps-arcade-unity",
+    "title": "TPS Arcade 3D",
+    "engine": "Unity",
+    "categories": [
+      "Unity",
+      "Academic Project"
+    ],
+    "pitch": "Le but du jeu est simple : survivre à des vagues infinies de zombies le plus longtemps possible sans mourir.",
+    "project_info": {
+      "team_size": "Solo",
+      "development_time": "5 jours",
+      "engine": "Unity",
+      "role": "Gameplay Programmer"
+    },
+    "about_project": [
+      "Ce projet académique avait pour objectif de créer un TPS (third-person shooter) en 3D avec une mécanique de tir sur Unity.",
+      "Je n’avais pas encore fait de TPS sur Unity, donc ça m’a vraiment permis de sortir de ma zone de confort. J’ai commencé par me concentrer sur les fondamentaux, notamment les 3C et le système de tir en troisième personne.",
+      "Ensuite, j’ai également créé un système dynamique de vagues d’ennemis et implémenté une interface du script via un Custom Editor.",
+      "Pour le level design, j’ai rajouté un escalier et une rambarde pour donner un peu de verticalité à la map. Même si ce n’est pas parfait, j’ai aussi rajouté la possibilité d’aller dans un des bâtiments."
+    ],
+    "development": {
+      "Mécanique de gameplay": [
+        "J’ai commencé par créer le personnage à la troisième personne, m’inspirant du template Unity : Starter Assets — ThirdPerson. Une fois cela fait, j’ai créé la mécanique principale du jeu qui est le tir au pistolet. Pour placer correctement la caméra, j’ai également utilisé CineMachine que j’utilise souvent dans la plupart de mes projets Unity, surtout en 3D. Cependant, en raison de contraintes de temps, il reste un problème que je n’ai pas eu le temps de régler. Le personnage se tourne légèrement lorsqu'un ennemi s'approche pour le frapper."
+      ],
+      "Éditeur de niveau et outils": [
+        "Pour le système de spawn d’ennemi (zombie). J’ai créé une interface du script à l’aide d’un Custom Editor, cet éditeur de niveau permet de configurer les vagues d'ennemis et définir les points de spawn directement dans l'interface Unity. Cet outil permet d'ajuster facilement le nombre de zombies par vague, leur fréquence d'apparition en pourcentage et leur position initiale. Il permet également de visualiser les zones de spawn à l'aide de Gizmos afin de faciliter la compréhension du script."
+      ],
+      "IA et comportement des ennemis": [
+        "J’ai utilisé pour les ennemis un système de Pathfinding sur les NavMesh d’Unity pour qu’ils se déplacent dans l’arène et atteignent le joueur. Le comportement des zombies est simple, mais efficace : ils détectent le joueur à une certaine distance et se rapprochent d'eux jusqu'à ce qu'ils puissent attaquer."
+      ],
+      "Défis techniques": [
+        "L’un des plus gros défis sur ce projet, c’était de créer un contrôleur TPS fluide avec un système de tir. Ce qui m’a posé problème, c’est que le personnage devait avancer dans la direction où regardait la caméra, et que celle-ci était contrôlée par la souris ou le joystick. La gestion de la rotation du personnage m’a aussi pas mal posé problème."
+      ]
+    },
+    "assets_resources": {
+      "Personnages": "Le Rigging des personnages et l'animation des personnages viennent de Mixamo.",
+      "Environnement": "Des packs d'actifs gratuits ont été utilisés pour l'arène et les obstacles."
+    },
+    "links": [
+      {
+        "text": "Game Build",
+        "url": "https://coloneil.itch.io/tps-arcade-3d"
+      }
+    ],
+    "images": [
+      "img/tps_arcade_3d.png",
+      "img/tps_arcade_3d_2.png"
+    ],
+    "videos": [
+      "https://www.youtube.com/watch?v=3tKW3DS8CYM"
+    ]
+  },
+  {
+    "id": "space-cleaners",
+    "title": "Space Cleaners",
+    "engine": "Unreal Engine",
+    "categories": [
+      "Unreal Engine",
+      "Game Jam"
+    ],
+    "pitch": "Space Cleaners est un jeu coopératif local dans lequel vous êtes attaché à votre ami par une corde. L'un de vous doit réparer le vaisseau spatial, tandis que l'autre fabrique les outils nécessaires aux réparations.",
+    "project_info": {
+      "team_size": "6",
+      "development_time": "1 weekend + 5 jours",
+      "engine": "Unreal Engine",
+      "role": "Gameplay Programmer"
+    },
+    "about_project": [
+      "Space Cleaners a été développé lors du Global Game Jam 2024 sur le thème « Make Me Laugh ». L'objectif était de créer une expérience coopérative à la fois amusante et chaotique, où deux joueurs travaillent ensemble pour réparer une station spatiale à l'aide d'outils absurdes. Les joueurs sont physiquement reliés par une corde, ce qui les oblige à synchroniser leurs mouvements. L'un des joueurs est responsable des réparations, tandis que l'autre doit fabriquer et fournir les outils nécessaires. J'ai collaboré avec un autre programmeur de jeu, tandis que le reste de l'équipe s'est concentré sur la direction artistique et la conception sonore. Nous avons développé le jeu en un seul week-end, mais il n’a pas été achevé dans le week-end. Il n’était que partiellement jouable. Avec l'accord de mon équipe, j'ai travaillé seul pendant cinq jours supplémentaires pour finir le jeu et le rendre jouable pour une présentation lors de la journée portes ouvertes de notre école."
+    ],
+    "development": {
+      "Mécanique de gameplay": [
+        "Le jeu est basé sur un système coopératif asymétrique. D’un côté, il y a la station, et, de l’autre, l’espace avec les satellites. Le joueur dans la station a comme mécanique le craft d’objet permettant la réparation des satellites. Pour cela, il possède un stock illimité d’objets qu’ils récupèrent en interagissant avec un stock. Côté technique, j’ai utilisé une simple Line Trace pour ce personnage. Il peut aussi interagir avec la poubelle afin de vider sa main de l’objet inutile qu’il a pris, avec la table de craft pour crafter les objets de réparation en quelques secondes et enfin avec le sas de décompression pour envoyer l’objet dans l’espace à l’autre joueur. Le joueur dans l’espace doit récupérer les objets donnés par celui dans la station et réparer les dégâts sur les différents éléments dans le temps imparti. Ajouté à cela, une corde accrochée aux deux personnages ajoute un défi supplémentaire, car les mouvements doivent être soigneusement coordonnés pour éviter de se gêner mutuellement."
+      ],
+      "Physique et interaction avec le joueur": [
+        "L'un des principaux aspects du développement a été la mise en place d'une corde dynamique reliant les deux joueurs. Cette corde réagit aux mouvements et aux forces appliqués, obligeant les joueurs à anticiper leurs actions pour éviter de s'emmêler ou de se ralentir l'un l'autre en apesanteur. Plusieurs ajustements ont été nécessaires pour assurer un comportement stable et fluide tout en maintenant l'aspect comique du jeu."
+      ],
+      "Multijoueur local et gestion des joueurs": [
+        "Je me suis occupé en grande partie des joueurs et de leurs mécaniques. Le jeu a été conçu pour deux joueurs sur le même écran, ce qui a représenté un défi technique puisqu'il s'agissait de notre première expérience en matière de multijoueur local. L'une de mes principales difficultés a été de m’assurer que les deux joueurs n'apparaissent pas au même endroit au début de la partie. Cette logique est entièrement gérée par un script que j’ai construit dans le GameMode du jeu, ce qui garantit un placement optimal dès le début de la partie. La complexité a été accrue par le fait que chaque joueur évolue dans un environnement différent : l'un se déplace à l'intérieur de la station spatiale avec une gravité normale, tandis que l'autre flotte en apesanteur à l'extérieur. Cette asymétrie m’a posé assez de travail supplémentaire sur les contrôles et les interactions."
+      ],
+      "Défis techniques": [
+        "L'un des défis que j’ai eus a donc été la conception des évents de réparation dans l’espace. C’était une des premières fois que j’utilisais un timer pour afficher le temps dans un projet et donc au début, ce fut assez complexe à mettre en place. Grâce à ce projet, j’ai su bien m’entrainer sur cela et j’ai pu mettre en place des évents après un certain timing défini. J'ai également eu des difficultés sur les contrôles des personnages et leurs spawns, étant donné que je n'avais jamais fait cela, j'ai dû faire beaucoup de recherche. Nous avons eu des difficultés, notamment avec la corde dynamique, mais je ne me suis pas personnellement concentré sur cette partie. Je me suis occupé en priorité sur les mécaniques de fabrication et de craft d’objets de réparation."
+      ]
+    },
+    "assets_resources": {
+      "Personnages": "Modèles d'astronautes créés par les artistes de l'équipe.",
+      "Animations": "Le Rigging du personnage et l'animation du personnage viennent de Mixamo.",
+      "Environnement": "Les actifs de la station spatiale créés pendant le brouillage."
+    },
+    "links": [
+      {
+        "text": "Game Jam Page",
+        "url": "https://globalgamejam.org/games/2024/space-cleaner-7"
+      },
+      {
+        "text": "Game Build",
+        "url": "https://coloneil.itch.io/space-cleaners"
+      }
+    ],
+    "images": [
+      "img/spacecleaners.png",
+      "img/spacecleaners2.png",
+      "img/spacecleaners3.png"
+    ],
+    "videos": []
+  },
+  {
+    "id": "only-balls",
+    "title": "Only Balls",
+    "engine": "Unreal Engine",
+    "categories": [
+      "Unreal Engine",
+      "Game Jam"
+    ],
+    "pitch": "Only Balls vous permet de contrôler un poisson dans un aquarium en mouvement, en gérant son inertie.",
+    "project_info": {
+      "team_size": "5",
+      "development_time": "1 weekend",
+      "engine": "Unreal Engine",
+      "role": "Gameplay Programmer"
+    },
+    "about_project": [
+      "Ce projet a été développé pendant la Global Game Jam 2025 sur le thème « Bubble ». L'objectif était de créer un jeu en un week-end en mettant l'accent sur les mouvements basés sur la physique d’une balle pour associer le projet au thème Bubble. Le joueur doit contrôler un poisson piégé dans un aquarium roulant, ce qui nécessite une gestion précise des mouvements et un bon contrôle de l'inertie. Mon rôle dans l'équipe était exclusivement axé sur la programmation, tandis que les autres membres de l'équipe, qui étaient des artistes, s'occupaient de la conception visuelle et de la création d'actifs."
+    ],
+    "development": {
+      "Mécanique de gameplay": [
+        "Je me suis donc occupé de créer la balle à l’aide d’un BP_Pawn et non un BP_Character. Pour avoir quelque chose d’optimal, j’ai fait énormément de Playtest afin d’affiner de plus en plus la physique de la balle et la façon de la Controller. Ayant eu la chance d’être sur place, j’ai reçu beaucoup de commentaires de différentes personnes de la Jam, ce qui m’a permis d’obtenir quelque chose de vraiment bien. Chaque mouvement affecte donc la stabilité du bocal et sa capacité à monter. Le joueur a également la possibilité de sauter."
+      ],
+      "Assemblage du contrôleur": [
+        "J’ai eu quelques complications et d’ailleurs, je n’ai pas eu le temps de finir par manque de temps. Je devais faire en sorte que la balle tourne sur elle-même pour garder la physique du mouvement et faire en sorte que le poisson reste droit avec l’eau dans le bocal. Je n’ai pas réussi à temps à mettre toutes les animations du poisson dans le bocal, mais j’ai fait mon maximum dans les temps."
+      ],
+      "Conception des niveaux et environnement": [
+        "Le jeu se déroule dans un environnement vertical où le joueur doit grimper tout en gardant le contrôle du bocal à poissons. Le Level Design a été confectionné par un artiste, le but était de disposer et créer des objets un peu aléatoirement, mais qu’ils voulaient modéliser."
+      ],
+      "Défis techniques": [
+        "L'un des principaux défis consistait à garantir une physique intuitive et réactive d’une balle afin que le joueur puisse la contrôler. Les mouvements du bocal à poissons devaient être réalistes tout en restant jouables et attrayants."
+      ]
+    },
+    "assets_resources": {
+      "Contrôleur": "Modèle de poisson en 3D créé et animé par une artiste de l'équipe.",
+      "Environnement": "Tous les actifs ont été créés par l'équipe artistique pendant la jam."
+    },
+    "links": [
+      {
+        "text": "Game Jam Page",
+        "url": "https://globalgamejam.org/games/2025/only-balls-8"
+      }
+    ],
+    "images": [
+      "img/ggj2025.png"
+    ],
+    "videos": []
+  }
+]

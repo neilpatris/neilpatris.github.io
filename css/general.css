@@ -1,0 +1,173 @@
+:root {
+    --first-color: #dbd8e3;
+    --second-color: #5c5470;
+    --third-color: #352f44;
+    --fourth-color: #2a2438;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--first-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* ==============================
+                NAVBAR 
+================================= */
+.custom-navbar {
+    background-color: var(--fourth-color);
+    padding: 10px 20px;
+}
+
+.navbar .navbar-brand {
+    color: var(--first-color) !important;
+    font-size: 20px;
+    white-space: nowrap;
+}
+
+.navbar .nav-link {
+    color: var(--first-color) !important;
+    font-size: 18px;
+    margin: 0 10px;
+    white-space: nowrap;
+}
+
+.navbar .navbar-toggler {
+    border-color: var(--first-color) !important;
+    border-radius: 4px;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgb(255, 255, 255)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+@media screen and (min-width: 992px) {
+    .navbar-nav {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .navbar-collapse {
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar-nav {
+        position: static;
+        transform: none;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.navbar .navbar-nav .nav-link:hover {
+    outline: 1px solid var(--first-color);
+}
+
+.navbar .navbar-nav .active {
+    font-weight: bold;
+}
+
+/* ==============================
+                Cookies
+================================= */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--fourth-color);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cookie-banner div {
+    display: flex;
+    gap: 10px;
+}
+
+.cookie-banner button {
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#accept-cookies {
+    background-color: #4caf50;
+    color: white;
+}
+
+#reject-cookies {
+    background-color: #f44336;
+    color: white;
+}
+
+#accept-cookies:hover,
+#reject-cookies:hover {
+    opacity: 0.8;
+}
+
+/* ==============================
+                Footer 
+================================= */
+.contain-footer {
+    margin-top: 35px;
+}
+
+.contain-footer footer {
+    border-top: 2px solid var(--third-color) !important;
+    padding: 15px;
+    text-align: center;
+}
+
+.contain-footer footer .text-body-secondary,
+.contain-footer footer .bi {
+    color: var(--third-color) !important;
+}
+
+/* ==============================
+      RESPONSIVE ADJUSTMENTS 
+================================= */
+@media screen and (max-width: 992px) {
+    .custom-navbar {
+        padding: 10px;
+    }
+
+    .navbar-toggler {
+        display: block;
+        border: 1px solid var(--first-color);
+        background: none;
+    }
+
+    .navbar-collapse {
+        display: none;
+        width: 100%;
+        background: var(--fourth-color);
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .navbar-collapse.show {
+        display: block !important;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    .nav-link {
+        padding: 10px;
+        font-size: 18px;
+    }
+}
