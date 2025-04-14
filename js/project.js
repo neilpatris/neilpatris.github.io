@@ -82,16 +82,17 @@ $(document).ready(function(){
 
             // Images
             if (project.images && project.images.length > 1) {
-                let imagesHTML = `<h3>Gallery</h3>`;
-                
+                let imagesHTML = `<h3>Gallery</h3><div class="project-images">`;
+            
                 project.images.forEach((image, index) => {
                     if (index !== 0) {
-                        imagesHTML += `<img src="${image}" alt="Project Image">`;
+                        imagesHTML += `<div><img src="${image}" alt="Project Image"></div>`;
                     }
                 });
-
+            
+                imagesHTML += `</div>`;
                 $("#image-container").html(imagesHTML);
-            }
+            }            
 
             if (project.videos && project.videos.length > 1) {
                 let videosHTML = `<h3>Additional Videos</h3>`;
@@ -113,12 +114,20 @@ $(document).ready(function(){
             }
 
             // Links
-            if (project.links && project.links.length > 0) {
-                let linksHTML = ``;
-                project.links.forEach(link => {
-                    linksHTML += `<p><a href="${link.url}" target="_blank">${link.text}</a></p>`;
-                });
-                $("#project-links").html(linksHTML);
+            if (project.links && Array.isArray(project.links)) {
+                const validLinks = project.links.filter(link => link && link.url && link.text);
+
+                if (validLinks.length > 0) {
+                    let linksHTML = ``;
+                    validLinks.forEach(link => {
+                        linksHTML += `<p><a href="${link.url}" target="_blank">${link.text}</a></p>`;
+                    });
+                    $("#project-links").html(linksHTML);
+                } else {
+                    $(".project-links").hide();
+                }
+            } else {
+                $(".project-links").hide();
             }
             
         } else {
