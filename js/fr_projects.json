@@ -1,7 +1,7 @@
 [
   {
     "id": "procedural-dungeon-generator-flower",
-    "title": "Procedural dungeon generator",
+    "title": "Procedural dungeon",
     "engine": "Unity",
     "categories": [
       "Unity",
@@ -10,7 +10,7 @@
     "pitch": "Dans le but de créer un rogue-lite avec un groupe d'étudiants, j'ai commencé ce projet pour permettre la création d'un donjon procédural en 3D dans Unity.",
     "project_info": {
       "team_size": "Solo",
-      "development_time": "2 semaines",
+      "development_time": "2 weeks",
       "engine": "Unity",
       "role": "Gameplay Programmer"
     },
@@ -62,9 +62,9 @@
     ],
     "pitch": "C’est un jeu d’arcade Endless Runner où l’on contrôle une personne sur une luge qui glisse sur une piste de ski. Le but est d’aller le plus loin possible tout en évitant les obstacles pour obtenir le meilleur score.",
     "project_info": {
-      "team_size": "4",
-      "development_time": "4 jours",
-      "engine": "Unreal Engine",
+      "team_size": "4 members",
+      "development_time": "4 days",
+      "engine": "UE5",
       "role": "Gameplay Programmer & Leader"
     },
     "about_project": [
@@ -115,8 +115,8 @@
     "pitch": "C’est un jeu d’arcade de Mini-Golf. Le but du jeu est donc de mettre la balle dans le trou avec le moins de coups possible. Le temps est compté ainsi que les coups. Si deux tentatives ont le même nombre de coups, la plus rapide est mieux classée.",
     "project_info": {
       "team_size": "Solo",
-      "development_time": "1 semaine",
-      "engine": "Unreal Engine",
+      "development_time": "1 week",
+      "engine": "UE5",
       "role": "Gameplay Programmer"
     },
     "about_project": [
@@ -164,8 +164,8 @@
     "pitch": "Le but de ce jeu de plateforme 3D Deathrun est simple : atteindre la fin du niveau sans tomber, éviter les pièges et ne pas se faire écraser par la boule piquante géante qui vous poursuit.",
     "project_info": {
       "team_size": "Solo",
-      "development_time": "1 semaine",
-      "engine": "Unreal Engine 5",
+      "development_time": "1 week",
+      "engine": "UE5",
       "role": "Gameplay Programmer"
     },
     "about_project": [
@@ -213,7 +213,7 @@
     "pitch": "C’est un Plateformer en 2D inspiré de Super Mario Bros et Super Meat Boy, où le joueur doit progresser à travers les niveaux piégés en maîtrisant le Wall Jump et la propulsion aérienne.",
     "project_info": {
       "team_size": "Solo",
-      "development_time": "12 jours",
+      "development_time": "12 days",
       "engine": "Unity",
       "role": "Gameplay Programmer"
     },
@@ -263,8 +263,8 @@
     "pitch": "Un jeu de Tower Defense dans lequel le joueur doit défendre son château contre des vagues d’ennemis en plaçant stratégiquement des tourelles. Chaque tourelle a ses propres caractéristiques, et il faut bien gérer ses ressources pour tenir face aux assauts répétés.",
     "project_info": {
       "team_size": "Solo",
-      "development_time": "1 semaine",
-      "engine": "Unreal Engine",
+      "development_time": "1 week",
+      "engine": "UE5",
       "role": "Gameplay Programmer"
     },
     "about_project": [
@@ -316,7 +316,7 @@
     "pitch": "Le but du jeu est simple : survivre à des vagues infinies de zombies le plus longtemps possible sans mourir.",
     "project_info": {
       "team_size": "Solo",
-      "development_time": "5 jours",
+      "development_time": "5 days",
       "engine": "Unity",
       "role": "Gameplay Programmer"
     },
@@ -368,9 +368,9 @@
     ],
     "pitch": "Space Cleaners est un jeu coopératif local dans lequel vous êtes attaché à votre ami par une corde. L'un de vous doit réparer le vaisseau spatial, tandis que l'autre fabrique les outils nécessaires aux réparations.",
     "project_info": {
-      "team_size": "6",
-      "development_time": "1 weekend + 5 jours",
-      "engine": "Unreal Engine",
+      "team_size": "6 members",
+      "development_time": "1 weekend + 5 days",
+      "engine": "UE5",
       "role": "Gameplay Programmer"
     },
     "about_project": [
@@ -422,9 +422,9 @@
     ],
     "pitch": "Only Balls vous permet de contrôler un poisson dans un aquarium en mouvement, en gérant son inertie.",
     "project_info": {
-      "team_size": "5",
+      "team_size": "5 members",
       "development_time": "1 weekend",
-      "engine": "Unreal Engine",
+      "engine": "UE5",
       "role": "Gameplay Programmer"
     },
     "about_project": [

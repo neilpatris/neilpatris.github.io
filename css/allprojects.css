@@ -95,15 +95,17 @@
   color: var(--first-color);
 }
 
-.skewed p {
-  font-size: 0.9em;
-  line-height: 23px;
-}
-
 .skewed h1 {
   margin: 0;
+  padding-bottom: 2px;
+  margin-bottom: 5px;
   color: var(--first-color);
-  font-size: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--first-color);
+  width: fit-content;
 }
 
 .skewed {
@@ -115,7 +117,7 @@
 }
 
 .skewed .text {
-  padding: 1.5em;
+  padding: 1em;
   width: 50%;
   display: flex;
   justify-content: space-evenly;
@@ -142,19 +144,81 @@
   top: 50%;
   transform: translateY(-50%) rotate(20deg);
   background: var(--second-color);
-  width: 40%;
+  width: 50%;
   height: 140%;
   box-shadow: 0 0 20px rgb(0, 0, 0, 0.7);
 }
 
-.skewed-left .image::before {
-  transform: translateY(-50%) rotate(-20deg);
-  left: initial;
-  right: -6.1em;
+.skewed img {
+  width: 130%;
 }
 
-.skewed img {
-  width: 140%;
+.project-identity {
+  margin-top: 5px;
+  line-height: 1.6;
+}
+
+.info-box {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--third-color);
+  padding: 4px 8px;
+  margin: 4px 4px 6px 0;
+  border-radius: 6px;
+  color: var(--first-color);
+}
+
+.label-info {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.5px;
+  color: var(--first-color);
+  background-color: var(--fourth-color);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 5px;
+} 
+
+.info-value {
+  font-weight: 500;
+  font-size: 0.85em;
+  color: var(--first-color);
+}
+
+.game-build-link {
+  color: #45a6f5 !important;
+  font-weight: bold;
+  font-size: 0.95em;
+  text-decoration: underline !important;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.game-build-link:hover {
+  color: #0b7dda !important;
+  text-decoration: underline;
+}
+
+.read-more-text {
+  display: inline-block;
+  text-align: center;
+  align-self: center;
+  margin-top: 10px;
+  padding: 4px 10px;
+  font-weight: bold;
+  font-size: 0.9em;
+  color: var(--first-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.read-more-text:hover {
+  text-decoration: underline !important;
+  background-color: var(--fourth-color);
 }
 
 /* ==============================
@@ -248,3 +312,4 @@
       font-size: 0.75em;
   }
 }
+
