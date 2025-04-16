@@ -132,9 +132,22 @@
 
 .skewed .image {
   width: 50%;
-  height: 17em;
+  aspect-ratio: 16/9;
   position: relative;
   overflow: hidden;
+  display: flex;
+}
+
+.skewed .image > div {
+  width: 100%;
+  height: 100%;
+}
+
+.skewed .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .skewed .image::before {
@@ -147,10 +160,6 @@
   width: 50%;
   height: 140%;
   box-shadow: 0 0 20px rgb(0, 0, 0, 0.7);
-}
-
-.skewed img {
-  width: 130%;
 }
 
 .project-identity {
