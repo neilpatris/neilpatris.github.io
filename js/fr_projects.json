@@ -105,55 +105,6 @@
     ]
   },
   {
-    "id": "mini-golf-unreal",
-    "title": "Mini-Golf Arcade",
-    "engine": "Unreal Engine",
-    "categories": [
-      "Unreal Engine",
-      "Academic Project"
-    ],
-    "pitch": "C’est un jeu d’arcade de Mini-Golf. Le but du jeu est donc de mettre la balle dans le trou avec le moins de coups possible. Le temps est compté ainsi que les coups. Si deux tentatives ont le même nombre de coups, la plus rapide est mieux classée.",
-    "project_info": {
-      "team_size": "Solo",
-      "development_time": "1 week",
-      "engine": "UE5",
-      "role": "Gameplay Programmer"
-    },
-    "about_project": [
-      "Ce projet académique consistait à développer un jeu de mini-golf en solo avec un système de classement personnel. L’objectif de ce projet était de me perfectionner en Blueprint notamment l’utilisation des Event Dispatchers. J’ai également beaucoup appris sur le polish de la physique d'une balle."
-    ],
-    "development": {
-      "Mécanique de gameplay": [
-        "Le joueur peut régler la puissance de son tir avant de frapper la balle. La balle a été pensée pour qu’elle ressemble au plus à une physique de balle simple de mini-golf. Ce n’est pas parfait, mais j’ai fait le maximum dans le timing court que j’avais. Pour aider à la planification des coups, j'ai mis en place un système de tracé de ligne pour prédire la trajectoire de la balle, ce qui permet au joueur d'anticiper le mouvement avant de frapper."
-      ],
-      "Event Dispatchers": [
-        "J’ai choisi d’intégrer un Event Dispatcher au moment où le joueur termine un niveau. Ce dernier est appelé une fois que la balle tombe dans le trou, ce qui entraine plusieurs évènements simultanés, comme l’affichage du résumé du score pour ce level, ainsi que l’arrêt de la balle."
-      ],
-      "Système de classement": [
-        "Le score du joueur est déterminé par le nombre de coups qu’il a effectué pour terminer un trou, en cas d'égalité, le temps est comparé. J’ai aussi implémenté un système de sauvegarde pour stocker et afficher les meilleurs scores personnels du joueur."
-      ],
-      "Interface utilisateur et feedbacks": [
-        "J’ai implémenté une interface UI pour pouvoir visualiser rapidement ses meilleurs scores et choisir quel trou le joueur veut faire. Un résumé des différents meilleurs scores est aussi disponible. À la fin du trou, un récapitulatif, du score sur la dernière tentative est affiché. Pour les feedbacks, j’ai ajouté un effet sonore lorsqu’on frappe la balle."
-      ]
-    },
-    "assets_resources": {
-      "Modèles et textures": "Assets des décors provient de Megascan.",
-      "Matériaux et HDR": "Extrait des bibliothèques en ligne."
-    },
-    "links": [
-      {
-        "text": "Game Build",
-        "url": "https://coloneil.itch.io/arcade-mini-golf"
-      }
-    ],
-    "images": [
-      "img/minigolf.png"
-    ],
-    "videos": [
-      "https://www.youtube.com/watch?v=98MgNcpEyvw"
-    ]
-  },
-  {
     "id": "3d-platformer-deathrun",
     "title": "3D Platformer DeathRun",
     "engine": "Unreal Engine 5",
@@ -306,59 +257,6 @@
     "videos": []
   },
   {
-    "id": "tps-arcade-unity",
-    "title": "TPS Arcade 3D",
-    "engine": "Unity",
-    "categories": [
-      "Unity",
-      "Academic Project"
-    ],
-    "pitch": "Le but du jeu est simple : survivre à des vagues infinies de zombies le plus longtemps possible sans mourir.",
-    "project_info": {
-      "team_size": "Solo",
-      "development_time": "5 days",
-      "engine": "Unity",
-      "role": "Gameplay Programmer"
-    },
-    "about_project": [
-      "Ce projet académique avait pour objectif de créer un TPS (third-person shooter) en 3D avec une mécanique de tir sur Unity.",
-      "Je n’avais pas encore fait de TPS sur Unity, donc ça m’a vraiment permis de sortir de ma zone de confort. J’ai commencé par me concentrer sur les fondamentaux, notamment les 3C et le système de tir en troisième personne.",
-      "Ensuite, j’ai également créé un système dynamique de vagues d’ennemis et implémenté une interface du script via un Custom Editor.",
-      "Pour le level design, j’ai rajouté un escalier et une rambarde pour donner un peu de verticalité à la map. Même si ce n’est pas parfait, j’ai aussi rajouté la possibilité d’aller dans un des bâtiments."
-    ],
-    "development": {
-      "Mécanique de gameplay": [
-        "J’ai commencé par créer le personnage à la troisième personne, m’inspirant du template Unity : Starter Assets — ThirdPerson. Une fois cela fait, j’ai créé la mécanique principale du jeu qui est le tir au pistolet. Pour placer correctement la caméra, j’ai également utilisé CineMachine que j’utilise souvent dans la plupart de mes projets Unity, surtout en 3D. Cependant, en raison de contraintes de temps, il reste un problème que je n’ai pas eu le temps de régler. Le personnage se tourne légèrement lorsqu'un ennemi s'approche pour le frapper."
-      ],
-      "Éditeur de niveau et outils": [
-        "Pour le système de spawn d’ennemi (zombie). J’ai créé une interface du script à l’aide d’un Custom Editor, cet éditeur de niveau permet de configurer les vagues d'ennemis et définir les points de spawn directement dans l'interface Unity. Cet outil permet d'ajuster facilement le nombre de zombies par vague, leur fréquence d'apparition en pourcentage et leur position initiale. Il permet également de visualiser les zones de spawn à l'aide de Gizmos afin de faciliter la compréhension du script."
-      ],
-      "IA et comportement des ennemis": [
-        "J’ai utilisé pour les ennemis un système de Pathfinding sur les NavMesh d’Unity pour qu’ils se déplacent dans l’arène et atteignent le joueur. Le comportement des zombies est simple, mais efficace : ils détectent le joueur à une certaine distance et se rapprochent d'eux jusqu'à ce qu'ils puissent attaquer."
-      ],
-      "Défis techniques": [
-        "L’un des plus gros défis sur ce projet, c’était de créer un contrôleur TPS fluide avec un système de tir. Ce qui m’a posé problème, c’est que le personnage devait avancer dans la direction où regardait la caméra, et que celle-ci était contrôlée par la souris ou le joystick. La gestion de la rotation du personnage m’a aussi pas mal posé problème."
-      ]
-    },
-    "assets_resources": {
-      "Personnages": "Le Rigging des personnages et l'animation des personnages viennent de Mixamo.",
-      "Environnement": "Des packs d'actifs gratuits ont été utilisés pour l'arène et les obstacles."
-    },
-    "links": [
-      {
-        "text": "Game Build",
-        "url": "https://coloneil.itch.io/tps-arcade-3d"
-      }
-    ],
-    "images": [
-      "img/tps_arcade_3d.png",
-      "img/tps_arcade_3d_2.png"
-    ],
-    "videos": [
-      "https://www.youtube.com/watch?v=3tKW3DS8CYM"
-    ]
-  },
-  {
     "id": "space-cleaners",
     "title": "Space Cleaners",
     "engine": "Unreal Engine",
@@ -397,12 +295,12 @@
     },
     "links": [
       {
-        "text": "Game Jam Page",
-        "url": "https://globalgamejam.org/games/2024/space-cleaner-7"
-      },
-      {
         "text": "Game Build",
         "url": "https://coloneil.itch.io/space-cleaners"
+      },
+      {
+        "text": "Game Jam Page",
+        "url": "https://globalgamejam.org/games/2024/space-cleaner-7"
       }
     ],
     "images": [
