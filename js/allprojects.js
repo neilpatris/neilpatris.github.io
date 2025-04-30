@@ -95,21 +95,26 @@ $(document).ready(function(){
             });
         }
 
+        
         if (project.development) {
             modalHTML += `<h3>Project Development</h3>`;
             for (const [category, items] of Object.entries(project.development)) {
                 modalHTML += `<h4>${category.replace("_", " ")}</h4>`;
-                if (items.length > 1) {
-                    modalHTML += `<ul>`;
-                    items.forEach(item => {
-                        modalHTML += `<li>${item}</li>`;
-                    });
-                    modalHTML += `</ul>`;
-                } else if (items.length === 1) {
-                    modalHTML += `<p>${items[0]}</p>`;
-                }
+                items.forEach(item => {
+                    if (typeof item === "string") {
+                        modalHTML += `<p>${item}</p>`;
+                    } else if (typeof item === "object" && item.text) {
+                        modalHTML += `
+                            <div class="dev-paragraph-with-image">
+                                <div class="dev-text">${item.text}</div>
+                                ${item.image && item.image.trim() !== "" ? `<img src="${item.image}" alt="Dev Image" class="dev-image">` : ""}
+                            </div>
+                        `;
+                    }
+                });
             }
         }
+
 
         if (project.assets_resources && Object.values(project.assets_resources).some(value => value.trim() !== "")) {
             modalHTML += `<h3>Assets & Resources</h3><ul>`;
