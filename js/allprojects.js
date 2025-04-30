@@ -95,27 +95,26 @@ $(document).ready(function(){
             });
         }
 
-        
         if (project.development) {
             modalHTML += `<h3>Project Development</h3>`;
             for (const [category, items] of Object.entries(project.development)) {
                 modalHTML += `<h4>${category.replace("_", " ")}</h4>`;
                 items.forEach(item => {
-                    if (typeof item === "string") {
-                        modalHTML += `<p>${item}</p>`;
-                    } else if (typeof item === "object" && item.text) {
+                    if (item.image && item.image.trim() !== "") {
                         modalHTML += `
                             <div class="dev-paragraph-with-image">
-                                <div class="dev-text">${item.text}</div>
-                                ${item.image && item.image.trim() !== "" ? `<img src="${item.image}" alt="Dev Image" class="dev-image">` : ""}
+                                <img src="${item.image}" alt="Dev Image" class="dev-image">
+                                ${item.text}
                             </div>
                         `;
+                    } else {
+                        modalHTML += `<p class="dev-text">${item.text}</p>`;
                     }
                 });
+                
             }
         }
-
-
+        
         if (project.assets_resources && Object.values(project.assets_resources).some(value => value.trim() !== "")) {
             modalHTML += `<h3>Assets & Resources</h3><ul>`;
             for (const [key, value] of Object.entries(project.assets_resources)) {
@@ -134,7 +133,12 @@ $(document).ready(function(){
             if (validLinks.length > 0) {
                 modalHTML += `<h3>Links</h3>`;
                 validLinks.forEach(link => {
-                    modalHTML += `<p><a href="${link.url}" target="_blank">${link.text}</a></p>`;
+                    modalHTML += `
+                    <div class="external-link-wrapper">
+                        <a href="${link.url}" target="_blank" class="external-link-btn">
+                        ${link.text} ↗
+                        </a>
+                    </div>`;
                 });
             }
         }
@@ -160,3 +164,23 @@ $(document).ready(function(){
         $("#project-modal").fadeOut();
     });
 });
+
+// Clique sur une image de développement
+$(document).on("click", ".dev-image", function () {
+    const src = $(this).attr("src");
+    const modalZoom = `
+      <div class="image-lightbox">
+        <div class="image-lightbox-backdrop"></div>
+        <img src="${src}" alt="Zoomed" class="zoomed-img">
+      </div>
+    `;
+    $("body").append(modalZoom);
+    $("body").css("overflow", "hidden");
+  });
+  
+  // Ferme la lightbox au clic
+  $(document).on("click", ".image-lightbox-backdrop, .zoomed-img", function () {
+    $(".image-lightbox").remove();
+    $("body").css("overflow", "");
+  });
+  
