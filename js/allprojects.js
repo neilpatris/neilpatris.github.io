@@ -1,10 +1,23 @@
-
 $(document).ready(function(){
     let allProjects = [];
 
     $.getJSON("js/fr_projects.json?t=" + new Date().getTime(), function(data){
         allProjects = data;
         displayProjects(allProjects);
+    // Filtrage via filter bar
+    $(document).on("click", ".filter-btn", function () {
+        const filter = $(this).data("filter");
+
+        $(".filter-btn").removeClass("active");
+        $(this).addClass("active");
+
+        const filtered = filter === "all"
+            ? allProjects
+            : allProjects.filter(project => project.categories.includes(filter));
+
+        displayProjects(filtered);
+    });
+
     }).fail(function(){
         console.log("Erreur lors du chargement des projets !");
     });
@@ -115,18 +128,26 @@ $(document).ready(function(){
             }
         }
         
-        if (project.assets_resources && Object.values(project.assets_resources).some(value => value.trim() !== "")) {
+        if (project.assets_resources && Object.keys(project.assets_resources).length > 0) {
             modalHTML += `<h3>Assets & Resources</h3><ul>`;
-            for (const [key, value] of Object.entries(project.assets_resources)) {
-                if (value.trim() === "") continue;
-                const formattedValue = value.replace(
-                    /(https?:\/\/[^\s,]+)/g,
-                    ' <a href="$1" target="_blank">Lien</a>'
-                );
-                modalHTML += `<li><strong>${key.replace("_", " ")}:</strong> ${formattedValue}</li>`;
+          
+            for (const [category, entries] of Object.entries(project.assets_resources)) {
+              entries.forEach(resource => {
+                const text = resource.text || "";
+                const link = resource.link;
+          
+                modalHTML += `<li><strong>${category}:</strong> `;
+                if (link) {
+                  modalHTML += `${text} <a href="${link}" target="_blank" class="asset-link">Lien ↗</a>`;
+                } else {
+                  modalHTML += `${text}`;
+                }
+                modalHTML += `</li>`;
+              });
             }
+          
             modalHTML += `</ul>`;
-        }
+          }          
 
         if (project.links && Array.isArray(project.links)) {
             const validLinks = project.links.filter(link => link && link.url && link.text);
@@ -144,14 +165,16 @@ $(document).ready(function(){
         }
 
         if (project.images && project.images.length > 1) {
-            modalHTML += `<h3>Gallery</h3><div class="project-images">`;
+            modalHTML += `<h3>Gallery</h3><div class="project-gallery">`;
             project.images.forEach((image, index) => {
                 if (index !== 0) {
-                    modalHTML += `<div><img src="${image}" alt="Project Image" style="width: 100%; margin-bottom: 1rem;"></div>`;
+                    modalHTML += `
+                        <img src="${image}" alt="Project Screenshot" class="gallery-thumb dev-image">
+                    `;
                 }
             });
             modalHTML += `</div>`;
-        }
+        }        
 
         $("#project-modal-body").html(modalHTML);
         $("#project-modal").fadeIn();
@@ -165,22 +188,23 @@ $(document).ready(function(){
     });
 });
 
-// Clique sur une image de développement
+// Clique sur une image
 $(document).on("click", ".dev-image", function () {
     const src = $(this).attr("src");
     const modalZoom = `
-      <div class="image-lightbox">
-        <div class="image-lightbox-backdrop"></div>
-        <img src="${src}" alt="Zoomed" class="zoomed-img">
-      </div>
+    <div class="image-lightbox">
+      <div class="image-lightbox-backdrop"></div>
+      <button class="zoom-close-btn" aria-label="Close zoomed image">&times;</button>
+      <img src="${src}" alt="Zoomed" class="zoomed-img">
+    </div>
     `;
+  
     $("body").append(modalZoom);
     $("body").css("overflow", "hidden");
-  });
+});
   
-  // Ferme la lightbox au clic
-  $(document).on("click", ".image-lightbox-backdrop, .zoomed-img", function () {
-    $(".image-lightbox").remove();
-    $("body").css("overflow", "");
-  });
-  
+// Fermer image
+$(document).on("click", ".image-lightbox-backdrop, .zoomed-img, .zoom-close-btn", function () {
+$(".image-lightbox").remove();
+$("body").css("overflow", "");
+});

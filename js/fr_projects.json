@@ -116,7 +116,11 @@
       ]
     },
     "assets_resources": {
-      "Animations": "Le Rigging du personnage et l'animation du personnage viennent de Mixamo."
+      "Animations": [
+        {
+          "text": "Le Rigging du personnage et l'animation du personnage viennent de Mixamo"
+        }
+      ]
     },
     "links": [
       {
@@ -179,8 +183,17 @@
       ]
     },
     "assets_resources": {
-      "Animations": "Le Rigging du personnage et l'animation du personnage viennent de Mixamo.",
-      "Environnement_assets": "J'ai utilisé le « Ultimate Platformer Pack » de Quaternius. (https://quaternius.itch.io/ultimate-platformer-pack)"
+      "Animations": [
+        {
+          "text": "Le Rigging du personnage et l'animation du personnage viennent de Mixamo"
+        }
+      ],
+      "Environnement_assets": [
+        {
+          "text": "J'ai utilisé le « Ultimate Platformer Pack » de Quaternius",
+          "link": "https://quaternius.itch.io/ultimate-platformer-pack"
+        }
+      ]
     },
     "links": [
       {
@@ -241,8 +254,18 @@
       ]
     },
     "assets_resources": {
-      "Personnage": "Ethan the Hero (https://assetstore.unity.com/packages/2d/characters/ethan-the-hero-237992)",
-      "Environnement": "2D Pixel Art Platformer Biome - Plains (https://assetstore.unity.com/packages/2d/environments/2d-pixel-art-platformer-biome-plains-255002)"
+      "Personnage": [
+        {
+          "text": "Ethan the Hero",
+          "link": "https://assetstore.unity.com/packages/2d/characters/ethan-the-hero-237992"
+        }
+      ],
+      "Environnement": [
+        {
+          "text": "2D Pixel Art Platformer Biome - Plains",
+          "link": "https://assetstore.unity.com/packages/2d/environments/2d-pixel-art-platformer-biome-plains-255002"
+        }
+      ]
     },
     "links": [
       {
@@ -310,8 +333,22 @@
       ]
     },
     "assets_resources": {
-      "Environnement": "KayKit Medieval Hexagon Pack (https://kaylousberg.itch.io/kaykit-medieval-hexagon?download) and Low Poly Pack Forest (https://jaks.itch.io/lowpolyforestpack?download)",
-      "Towers": "Lindou Tower Defense Pack (https://lindou.itch.io/tower-defens)"
+      "Environment": [
+        {
+          "text": "KayKit Medieval Hexagon Pack",
+          "link": "https://kaylousberg.itch.io/kaykit-medieval-hexagon"
+        },
+        {
+          "text": "Low Poly Pack Forest",
+          "link": "https://jaks.itch.io/lowpolyforestpack"
+        }
+      ],
+      "Towers": [
+        {
+          "text": "Lindou Tower Defense Pack",
+          "link": "https://lindou.itch.io/tower-defens"
+        }
+      ]
     },
     "links": [
       {
@@ -347,7 +384,7 @@
       "Mécanique de gameplay": [
         {
           "text": "Le jeu est basé sur un système coopératif asymétrique. D’un côté, il y a la station, et, de l’autre, l’espace avec les satellites. Le joueur dans la station a comme mécanique le craft d’objet permettant la réparation des satellites. Pour cela, il possède un stock illimité d’objets qu’ils récupèrent en interagissant avec un stock. Côté technique, j’ai utilisé une simple Line Trace pour ce personnage. Il peut aussi interagir avec la poubelle afin de vider sa main de l’objet inutile qu’il a pris, avec la table de craft pour crafter les objets de réparation en quelques secondes et enfin avec le sas de décompression pour envoyer l’objet dans l’espace à l’autre joueur. Le joueur dans l’espace doit récupérer les objets donnés par celui dans la station et réparer les dégâts sur les différents éléments dans le temps imparti. Ajouté à cela, une corde accrochée aux deux personnages ajoute un défi supplémentaire, car les mouvements doivent être soigneusement coordonnés pour éviter de se gêner mutuellement.",
-          "image": " "
+          "image": "img/spacecleaners.png"
         }
       ],
       "Physique et interaction avec le joueur": [
@@ -370,9 +407,21 @@
       ]
     },
     "assets_resources": {
-      "Personnages": "Modèles d'astronautes créés par les artistes de l'équipe.",
-      "Animations": "Le Rigging du personnage et l'animation du personnage viennent de Mixamo.",
-      "Environnement": "Les actifs de la station spatiale créés pendant le brouillage."
+      "Personnages": [
+        {
+          "text": "Modèles d'astronautes créés par les artistes de l'équipe"
+        }
+      ],
+      "Animations": [
+        {
+          "text": "Le Rigging du personnage et l'animation du personnage viennent de Mixamo"
+        }
+      ],
+      "Environnement": [
+        {
+          "text": "Les actifs de la station spatiale créés pendant le brouillage"
+        }
+      ]
     },
     "links": [
       {
@@ -430,8 +479,16 @@
       ]
     },
     "assets_resources": {
-      "Contrôleur": "Modèle du poisson en 3D créé et animé par une artiste de l'équipe",
-      "Environnement": "Tous les assets ont été créés par l'équipe artistique pendant la jam"
+      "Contrôleur": [
+        {
+          "text": "Modèle du poisson en 3D créé et animé par une artiste de l'équipe"
+        }
+      ],
+      "Environnement": [
+        {
+          "text": "Tous les assets ont été créés par l'équipe artistique pendant la jam"
+        }
+      ]
     },
     "links": [
       {

@@ -1,6 +1,6 @@
-/* ==============================
-              Filter Bar 
-================================= */
+/* ============================== */
+/* 🔹 Filter Bar                  */
+/* ============================== */
 .filter-bar {
   display: flex;
   justify-content: center;
@@ -44,7 +44,7 @@
   margin-top: 5px;
 }
 
-.filter-btn:hover object {
+.filter-btn:hover img {
   transform: scale(1.2);
 }
 
@@ -73,9 +73,10 @@
   padding: 5px;
 }
 
-/* ==============================
-                Main 
-================================= */
+
+/* ============================== */
+/* 🔹 Main (cards)                */
+/* ============================== */
 .main {
   display: flex;
   margin: 0;
@@ -91,7 +92,7 @@
   opacity: 0.3;
 }
 
-.skewed p, small {
+.skewed p, .skewed small {
   color: var(--first-color);
 }
 
@@ -162,6 +163,10 @@
   box-shadow: 0 0 20px rgb(0, 0, 0, 0.7);
 }
 
+
+/* ============================== */
+/* 🔹 Project Identity & Boutons  */
+/* ============================== */
 .project-identity {
   margin-top: 5px;
   line-height: 1.6;
@@ -230,9 +235,10 @@
   background-color: var(--fourth-color);
 }
 
-/* ==============================
-                Modal project
-================================= */
+
+/* ============================== */
+/* 🔹 Modale (project)            */
+/* ============================== */
 .project-modal {
   position: fixed;
   top: 0;
@@ -357,11 +363,10 @@
   to { opacity: 1; transform: scale(1); }
 }
 
-.dev-paragraph-with-image {
-  margin: 20px 0;
-  overflow: hidden;
-}
 
+/* ============================== */
+/* 🔹 Paragraphes + Galerie   */
+/* ============================== */
 .dev-paragraph-with-image {
   overflow: hidden;
   margin: 20px 0;
@@ -375,12 +380,29 @@
   float: right;
   margin-left: 20px;
   margin-bottom: 10px;
-  width: 320px;
+  width: 350px;
   height: auto;
-  max-height: 220px;
   object-fit: contain;
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.asset-link {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 3px 8px;
+  background-color: var(--second-color);
+  color: var(--first-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.asset-link:hover {
+  background-color: var(--first-color);
+  color: var(--fourth-color);
 }
 
 .external-link-wrapper {
@@ -410,6 +432,29 @@
   border-color: var(--first-color);
 }
 
+.project-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.project-gallery .gallery-thumb {
+  width: 200px;
+  height: auto;
+  border-radius: 6px;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.project-gallery .gallery-thumb:hover {
+  transform: scale(1.05);
+}
+
+/* ============================== */
+/* 🔹 Lightbox (Zoom image)       */
+/* ============================== */
 .image-lightbox {
   position: fixed;
   top: 0;
@@ -429,6 +474,17 @@
   background: rgba(0, 0, 0, 0.85);
 }
 
+@keyframes zoomInFromThumb {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .zoomed-img {
   position: relative;
   width: auto;
@@ -444,21 +500,58 @@
   object-fit: contain;
 }
 
-@keyframes zoomInFromThumb {
-  from {
-    transform: scale(0.3);
-    opacity: 0;
+.zoom-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--first-color);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10002;
+  transition: color 0.2s ease;
+}
+
+.zoom-close-btn:hover {
+  color: var(--second-color);
+}
+
+@media screen and (max-width: 480px) {
+  .filter-bar {
+      flex-direction: column;
+      width: 40%;
+      padding: 5px;
   }
-  to {
-    transform: scale(1);
-    opacity: 1;
+
+  .filter-btn {
+      width: 100%;
+      padding: 8px;
+  }
+
+  .skewed {
+      width: 70%;
+      padding: 10px;
+  }
+
+  .skewed .text {
+      padding: 1em;
+  }
+
+  .skewed h1 {
+      font-size: 20px;
+  }
+
+  .skewed p {
+      font-size: 0.75em;
   }
 }
 
 
-/* ==============================
-       Responsive Design 
-================================= */
+/* ============================== */
+/* 🔹 Responsive Design           */
+/* ============================== */
 
 @media screen and (max-width: 1200px) {
   .skewed {
@@ -517,56 +610,10 @@
       text-align: center;
   }
 
-  .dev-paragraph-with-image {
-    overflow: hidden;
-  }
-
-  .dev-image {
-    float: none;
-    display: block;
-    margin: 0 auto 15px auto;
-    box-shadow: none !important;
-    width: 100%;
-    max-width: 100%;
-  }
-
   .zoomed-img {
     min-width: unset;
     min-height: unset;
-    width: 90vw;
+    width: 100%;
     height: auto;
-    max-width: 90vw;
-    max-height: 80vh;
-  }
+  } 
 }
-
-@media screen and (max-width: 480px) {
-  .filter-bar {
-      flex-direction: column;
-      width: 40%;
-      padding: 5px;
-  }
-
-  .filter-btn {
-      width: 100%;
-      padding: 8px;
-  }
-
-  .skewed {
-      width: 70%;
-      padding: 10px;
-  }
-
-  .skewed .text {
-      padding: 1em;
-  }
-
-  .skewed h1 {
-      font-size: 20px;
-  }
-
-  .skewed p {
-      font-size: 0.75em;
-  }
-}
-
