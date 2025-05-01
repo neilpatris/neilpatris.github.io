@@ -1,22 +1,22 @@
 $(document).ready(function(){
     let allProjects = [];
 
-    $.getJSON("js/fr_projects.json?t=" + new Date().getTime(), function(data){
+    $.getJSON(getLangFile() + "?t=" + new Date().getTime(), function (data){
         allProjects = data;
         displayProjects(allProjects);
-    // Filtrage via filter bar
-    $(document).on("click", ".filter-btn", function () {
-        const filter = $(this).data("filter");
+        // Filtrage via filter bar
+        $(document).on("click", ".filter-btn", function () {
+            const filter = $(this).data("filter");
 
-        $(".filter-btn").removeClass("active");
-        $(this).addClass("active");
+            $(".filter-btn").removeClass("active");
+            $(this).addClass("active");
 
-        const filtered = filter === "all"
-            ? allProjects
-            : allProjects.filter(project => project.categories.includes(filter));
+            const filtered = filter === "all"
+                ? allProjects
+                : allProjects.filter(project => project.categories.includes(filter));
 
-        displayProjects(filtered);
-    });
+            displayProjects(filtered);
+        });
 
     }).fail(function(){
         console.log("Erreur lors du chargement des projets !");
@@ -164,14 +164,12 @@ $(document).ready(function(){
             }
         }
 
-        if (project.images && project.images.length > 1) {
+        if (project.images && project.images.length > 0) {
             modalHTML += `<h3>Gallery</h3><div class="project-gallery">`;
             project.images.forEach((image, index) => {
-                if (index !== 0) {
-                    modalHTML += `
-                        <img src="${image}" alt="Project Screenshot" class="gallery-thumb dev-image">
-                    `;
-                }
+                modalHTML += `
+                    <img src="${image}" alt="Project Screenshot" class="gallery-thumb dev-image">
+                `;
             });
             modalHTML += `</div>`;
         }        

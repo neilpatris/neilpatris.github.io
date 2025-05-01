@@ -53,20 +53,6 @@ body {
     }
 }
 
-@media screen and (max-width: 991px) {
-    .navbar-collapse {
-        display: flex;
-        justify-content: center;
-    }
-
-    .navbar-nav {
-        position: static;
-        transform: none;
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
 .navbar .navbar-nav .nav-link:hover {
     outline: 1px solid var(--first-color);
 }

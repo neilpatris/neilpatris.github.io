@@ -15,45 +15,42 @@
       "role": "Gameplay Programmer"
     },
     "about_project": [
-      "Ce projet est développé dans le cadre d’une production étudiante pour créer un jeu de type rogue-lite et de gestion. L’objectif de ce projet est de développer un générateur de donjon en 3D dans Unity. Le donjon est créé de manière aléatoire lorsque le joueur décide d’explorer les profondeurs. J’ai conçu le donjon de manière modulaire, en commençant par les salles principales et en ajoutant des salles secondaires reliées par des couloirs.",
-      "Je voulais qu’il soit modulaire et facilement paramétrable dans l’éditeur si notre équipe décide de modifier certains points. J'ai utilisé un système basé sur des Prefabs de salles et de connecteurs, qui sont automatiquement alignés par des points de connexion appelés Doors.",
-      "J’ai également créé une interface personnalisée du script dans l’inspecteur Unity pour gérer tous les paramètres du générateur. Cela m’a permis de mieux organiser le travail et de rendre l’outil plus agréable à utiliser pour mon équipe.",
-      "Ce projet a vocation à s’améliorer au fur et à mesure de son avancement afin d’avoir un outil parfait pour notre équipe et notre projet."
+      "Dans le cadre d’un jeu étudiant combinant rogue-lite et gestion, ce projet de donjon procédural a été développé avec Unity. Le donjon est généré aléatoirement lorsque le joueur décide d’explorer les profondeurs. Pour ce faire, j’ai opté pour une approche modulaire, en commençant par concevoir les grandes salles, suivies des petites salles reliées par des corridors. Ce système a été conçu pour qu’il soit facilement configurable par le biais de l’éditeur, ce qui permettra de l’adapter aux besoins des autres membres de l’équipe et d’en faciliter les mises à jour."
     ],
     "development": {
       "Système de portes dynamiques": [
         {
-          "text": "Avant de créer des salles, j’ai développé un système pour positionner automatiquement les portes de chacune d’entre elles sur les emplacements disponibles. Pour ce faire, j’ai utilisé un programme appelé RoomSnapper, qui examine les Colliders du sol pour en déterminer les bords externes. Le script fonctionne également si l’on a plusieurs GameObject représentant le sol. Après avoir récupéré les bords, un autre programme, appelé « DoorSnapper », veille à ce que chaque porte soit parfaitement alignée avec une bordure (en la disposant sur l’Edge la plus proche), qu’elle soit orientée vers l’extérieur, qu’elle n’entre pas en collision avec un mur, et qu’elle ne se trouve pas trop près d’une autre porte. Ce système m'assure que toutes les portes sont prêtes à relier pour connecter des salles entre elles et évite beaucoup de problèmes lors de la génération du donjon.",
-          "image": "img/dungeonGenerateEx1.png"
+          "text": "Après avoir créé les portes, j’ai mis en place un système de génération du chemin principal du donjon en utilisant une structure de pile (Stack). La première salle est positionnée au départ, puis chaque salle supplémentaire est connectée à une porte libre de la précédente par un corridor, jusqu’à atteindre le nombre souhaité (réglable). La dernière pièce est toujours une salle finale choisie parmi une liste de prefabs.",
+          "image": "img/dungeonGenerateDoor.png"
         }
       ],
       "Génération des salles principales": [
         {
           "text": "Après avoir installé les portes, j’ai entamé la création du chemin principal du donjon en utilisant une structure de pile (Stack) pour faciliter la récupération de la dernière salle en cas de collision. J’ai commencé par positionner la première salle à l’origine (Vector3.zero). Ensuite, pour chaque nouvelle salle, j’ai choisi une porte disponible dans la salle précédente, j’y ai ajouté un connecteur, puis j’ai aligné la nouvelle salle sur ce connecteur. Je répète ce processus jusqu’à obtenir le nombre de salles voulu pour le donjon (paramétrable). La dernière salle sur le chemin principal est toujours une salle finale choisie à partir d’une liste spécifique de Prefabs.",
-          "image": " "
+          "image": "img/dungeonGenerateInterface.png"
         }
       ],
       "Génération des salles secondaires": [
         {
-          "text": "Une fois que toutes les salles principales sont en place, je parcours la pile de salles principales à l'envers afin de parcourir de la première salle à la dernière. Pour chaque salle, je vérifie s'il y a des portes disponibles pour attacher des salles secondaires. Le processus est le suivant, je choisis une porte libre et y connecte une salle en utilisant un connecteur. Je répète cette action un nombre de fois aléatoire, qui peut être ajusté dans le panneau de contrôle, entre deux valeurs prédéfinies. Il me reste une tâche inachevée : quand des pièces annexes possèdent plusieurs entrées, elles ne formeront qu’un seul itinéraire alternatif.",
-          "image": " "
+          "text": "Après la génération des salles principales, je parcours la pile à l’envers pour ajouter des salles secondaires. Pour chaque salle, si des portes sont disponibles, j’y connecte une ou plusieurs salles annexes, en fonction d’un nombre aléatoire configurable. Un cas non encore résolu est celui des salles annexes à plusieurs entrées, qui devraient idéalement former un seul chemin alternatif.",
+          "image": "img/dungeonGenerateEx2.png"
         }
       ],
       "Placement intelligent et résolution des collisions": [
         {
-          "text": "Chaque fois que j’essaie de placer une salle ou un connecteur, je vérifie qu’il n’y a pas d’espace occupé en utilisant un Physics.OverlapBox. Cette partie n’est pas encore terminée, car elle présente certains challenges et je continue de la développer. Pour l’instant, si une collision est détectée lors du placement d’un nouveau connecteur instancié ou d’une nouvelle salle instanciée, je supprime l’élément et je l’enlève également de la pile. Ensuite, je supprime la toute dernière salle et la remplace par une salle finale. Le problème de ce système est qu’il ne respecte pas le nombre de salles principales défini dans l’éditeur du script. C’est pour cette raison que je m’en occupe. Pour les salles secondaires, c’est moins dérangeant.",
-          "image": " "
+          "text": "Pour prévenir les superpositions, chaque tentative de positionnement utilise un Physics.OverlapBox. En cas de collision, la salle ou le connecteur est supprimé ainsi que la dernière salle posée. Ensuite, une salle finale est ajoutée. Ce système fonctionne, mais ne respecte pas encore toujours le nombre défini de salles principales. Je continue de travailler à l’amélioration de ce point.",
+          "image": ""
         }
       ],
       "Interface d’édition personnalisée": [
         {
-          "text": "J’ai également développé une interface personnalisée pour le script, ce qui me permet de tout gérer en un seul endroit et d’ajuster la génération de donjons directement dans l’éditeur d'Unity. Dans cet outil, vous pouvez spécifier la liste des préfabriqués pour les salles de base, les salles finales et les connecteurs. Il est crucial d’utiliser le bouton « Process All Room Prefabs » avant d’utiliser le donjon, surtout lorsque vous créez de nouvelles salles ou des connexions. Ce bouton permet de positionner et de créer les portes.  Ensuite, il faut définir les conteneurs où vont se placer les salles et les connecteurs. Pour finir, les paramètres de génération du donjon sont les plus importants. Ils incluent la taille du donjon, définie par le nombre de salles principales et le nombre de salles secondaires, situées entre deux valeurs. Cette interface me permet de tester différentes configurations très rapidement.",
+          "text": "J’ai développé une interface dans l’inspecteur Unity pour regrouper tous les paramètres du générateur de donjons. Elle permet de configurer les listes de prefabs (salles de base, finales, connecteurs), les conteneurs de génération et les paramètres de taille du labyrinthe. Le bouton « Process All Room Prefabs » crée automatiquement les portes pour les nouvelles salles. Cette interface simplifie les tests et les ajustements en cours de production.",
           "image": " "
         }
       ],
       "Défis techniques": [
         {
-          "text": "Le placement intelligent des portes a représenté l’un des plus gros défis. Je devais jouer avec les bordures du mesh ou des meshs du sol, éviter les zones bloquées par les murs, orienter automatiquement les portes et gérer tous les cas particuliers où une porte ne pouvait pas être placée. La disposition des salles du donjon selon leurs portes a également constitué un défi. J’ai réfléchi à plusieurs approches et j’ai choisi le système de pile, qui me semblait être la meilleure option dans ma situation. Finalement, le dernier défi qui me pose encore problème est la résolution des collisions entre les salles et les connecteurs. J'y ai travaillé dessus pour améliorer de jour en jour l'outil.",
+          "text": "Placer automatiquement les portes fut un défi important. Il fallait détecter correctement les bords exploitables, éviter les obstacles, orienter les portes et régler les cas particuliers. Le choix d’un système en pile pour organiser la disposition des salles a permis de gérer efficacement les collisions, bien que la résolution complète des conflits lors du placement reste une difficulté encore en cours d’optimisation.",
           "image": " "
         }
       ]
@@ -64,9 +61,7 @@
     ],
     "images": [
       "img/dungeonGenerateEx1.png",
-      "img/dungeonGenerateEx2.png",
-      "img/dungeonGenerateEx3.png",
-      "img/dungeonGenerateInterface.png"
+      "img/dungeonGenerateEx3.png"
     ],
     "videos": []
   },
@@ -86,13 +81,13 @@
       "role": "Gameplay Programmer & Leader"
     },
     "about_project": [
-      "Ce projet académique m’a permis de concevoir un contrôleur alternatif et de créer un jeu pour ce contrôleur à l’aide d’Unreal Engine. Il est constitué de deux cordes attachées à un joystick caché, une à droite et une à gauche, que le joueur doit tirer pour faire avancer une luge sur une piste de ski.",
-      "Le défi principal du projet consistait à créer une piste infinie générée procéduralement et dont la difficulté augmente progressivement. Étant donné que j’étais le seul prog, j'ai géré tous les aspects de la programmation du jeu, y compris les mécaniques, la génération d'obstacles procéduraux et l'interface utilisateur. Pendant ce temps, le reste de mon équipe s’est concentré sur l'aspect artistique du jeu et sur l'amélioration du contrôleur physique."
+      "Ce projet académique m’a permis de concevoir un contrôleur alternatif et de créer un jeu pour ce contrôleur à l’aide d’Unreal Engine.",
+      "Le défi principal du projet consistait à créer une piste infinie générée procéduralement et dont la difficulté augmente progressivement. Étant donné que j’étais le seul prog, j'ai géré tous les aspects de la programmation du jeu. Pendant ce temps, le reste de mon équipe s’est concentré sur l'aspect artistique du jeu et sur l'amélioration du contrôleur physique."
     ],
     "development": {
       "Conception du contrôleur": [
         {
-          "text": "Au début de notre projet, nous avons examiné plusieurs concepts de contrôleurs alternatifs et avons finalement opté pour un système physique qui évoque une luge. Le contrôleur a été construit en carton équipé de cordes de chaque côté et attachées à un joystick d'arcade. En tirant sur les cordes, le joueur pouvait se déplacer vers la gauche ou vers la droite. De multiples itérations ont été nécessaires pour polir la sensibilité dans le jeu, de solidifier la structure en carton de la luge et de rendre fonctionnel le contrôleur alternatif.",
+          "text": "Après avoir exploré plusieurs idées, notre choix s’est porté sur un système inspiré du mouvement d’une luge. Le contrôleur a été fabriqué en carton, avec deux cordes latérales fixées à un joystick. Plusieurs itérations ont été nécessaires pour ajuster la sensibilité des mouvements et rendre le contrôleur à la fois robuste et fonctionnel.", 
           "image": " "
         }
       ],
@@ -129,7 +124,6 @@
       }
     ],
     "images": [
-      "img/LugeGame01.png",
       "img/LugeGame01.png",
       "img/LugeGame02.png"
     ],
@@ -171,13 +165,13 @@
       ],
       "Interface utilisateur et son": [
         {
-          "text": "L'interface est simple, mais efficace : un menu principal, un menu de pause et un écran de fin. Une barre de santé donne au joueur sa vie. La vie du joueur est très faible et donc le jeu est très punitif mais il est possible de ne pas se faire one shot pour certains pièges. Pour le son, j'ai ajouté des feedbacks audios lorsqu’on se prend un piège ou une caisse afin de comprendre les pièges qui nous ont touchés. J’ai également mis une musique de fond dynamique lors de la course du joueur.",
+          "text": "L’interface comprend un menu principal, une pause et un écran de fin. Une barre de vie très réduite rend le jeu punitif, bien que certains pièges n’infligent pas de mort instantanée. Côté son, des effets audio signalent les pièges touchés, et une musique dynamique accompagne la course.",
           "image": " "
         }
       ],
       "Level Design": [
         {
-          "text": "Pour le level design, j’ai commencé par créer des blocs représentant les pièges que je voulais inclure et leur place dans la course. J’ai ensuite ajouté des pièges plus petits et des plateformes pour les relier. Le but est de créer une course tout en étant précis. Le niveau n'est vraiment pas facile pour les débutants, mais pour les joueurs expérimentés, il offre un bon challenge.",
+          "text": "J’ai d’abord conçu les blocs de pièges principaux avant de les relier par des plateformes. Le parcours exige précision et timing, offrant un bon challenge, surtout pour les joueurs expérimentés.",
           "image": " "
         }
       ]
@@ -224,13 +218,12 @@
       "role": "Gameplay Programmer"
     },
     "about_project": [
-      "Ce projet académique avait pour objectif de créer un jeu de plateforme en 2D dans Unity, mais avec une contrainte particulière : ne pas utiliser le moteur physique intégré à Unity. C'était aussi un moyen de mettre en pratique mes premiers cours sur Unity à travers un vrai projet.",
-      "Dans ce projet, je me suis focus sur les mécaniques du personnage, notamment le saut ainsi que le Wall Jump qui est une mécanique principale du projet. J’ai aussi implémenté une mécanique de propulsion d’air pour élever le joueur dans les airs, ainsi que d'autres mécaniques. Enfin, j’ai dû aussi assurer la transition d’un niveau à l’autre tout en gardant certaines données du joueur."
+      "Ce projet académique avait pour objectif de créer un jeu de plateforme en 2D dans Unity, mais avec une contrainte particulière : ne pas utiliser le moteur physique intégré à Unity. C'était aussi un moyen de mettre en pratique mes premiers cours sur Unity à travers un vrai projet."
     ],
     "development": {
       "Mécanique de gameplay": [
         {
-          "text": "Tout le gameplay du jeu a été créé entièrement sans les forces physiques d’Unity. Pour cela, j’ai utilisé des Raycasts pour détecter l’environnement autour du personnage. J’ai implémenté le Wall Jump à l’aide de Raycasts qui permettent de détecter les murs et d’autoriser un saut supplémentaire lorsque le joueur est en contact avec un mur. La deuxième mécanique principale du jeu que j’ai développé a été la propulsion aérienne. Je l’ai créée pour qu’elle modifie directement la position du personnage afin de l’élever dans les airs et recréer un effet de flottement. D’autres mécaniques de pièges ont été implémentées, comme des piques qui sortent du sol toutes les 2 secondes, des scies, des plateformes tombantes …",
+          "text": "Tout le gameplay du jeu a été créé entièrement sans les forces physiques d’Unity. Pour cela, j’ai utilisé des Raycasts pour détecter l’environnement autour du personnage. J’ai implémenté le Wall Jump à l’aide de Raycasts qui permettent de détecter les murs et d’autoriser un saut supplémentaire lorsque le joueur est en contact avec un mur. J’ai développé une mécanique de propulsion aérienne pour qu’elle modifie directement la position du personnage afin de l’élever dans les airs et recréer un effet de flottement. D’autres mécaniques de pièges ont été implémentées, comme des piques qui sortent du sol, des scies, des plateformes tombantes…",
           "image": " "
         }
       ],
@@ -296,38 +289,37 @@
       "role": "Gameplay Programmer"
     },
     "about_project": [
-      "Ce projet académique avait pour but de créer un Tower Defense sur Unreal Engine en utilisant du C++. Ce projet m’a permis d’apprendre le C++ sur Unreal Engine et de perfectionner mes connaissances sur son utilisation.",
-      "J’ai écrit en C++ le code de toutes les tourelles du jeu, en veillant à ce que chacune ait des caractéristiques uniques : portée, puissance de feu, cadence de tir, etc. Pour les ennemis, j’ai utilisé un système de pathfinding pour qu’ils suivent le chemin jusqu’au château.",
-      "Pour le joueur, afin de voir d’en haut sa stratégie, j’ai mis une caméra Top Down se déplaçant avec ZQSD. J’ai créé également un système de point & click lui permettant d’interagir avec le jeu et d’acheter des tourelles à des endroits précis, tout en gérant son économie pour optimiser sa défense au fil des vagues."
+      "Ce projet académique consistait à créer un Tower Defense en C++ avec Unreal Engine. Il m’a permis d’apprendre le C++ dans cet environnement et de consolider mes compétences techniques.",
+      "J’ai codé toutes les tourelles, chacune ayant des caractéristiques uniques (portée, dégâts, cadence…). J’ai aussi mis en place le pathfinding des ennemis et un système de caméra top-down avec commandes ZQSD et interface de placement de tourelles via un système de point & click."
     ],
     "development": {
       "Mécanique de gameplay": [
         {
-          "text": "Dans un Tower Defense, l’élément principal est l’installation de défenses, qui sont des tourelles. Pour le placement des défenses, j’ai créé une mécanique de point & click pour interagir avec l’emplacement de tourelle vide et pouvoir acheter une nouvelle tourelle. Pour les tourelles, le fonctionnement principal a été fait en C++. J’ai mis en place un système de vagues d’ennemis qui permet de faire monter la difficulté petit à petit.",
-          "image": " "
+          "text": "J’ai mis en place une mécanique de point & click pour permettre au joueur d’acheter et placer des tourelles. Chaque tourelle, codée en C++, possède des caractéristiques uniques (portée, dégâts, cadence). Un système de vagues d’ennemis progressives permet d’augmenter la difficulté.",
+          "image": "img/towerdefense2.png"
         }
       ],
       "IA ennemie et pathfinding": [
         {
-          "text": "J'ai structuré le projet autour d’un système de pathfinding prédéfini que les ennemis suivent. Chaque type d’ennemi peut emprunter un chemin différent et certains peuvent même accéder à des raccourcis interdits pour d’autres. Pour faire cela, j’ai utilisé plusieurs « NavModifierVolume » afin de restreindre l'accès de certains chemins à certains types d’ennemis. Chaque type d'ennemi a un comportement spécifique, certains étant plus rapides et/ou plus résistants.",
+          "text": "Les ennemis suivent un chemin prédéfini grâce au pathfinding. Certains types d’ennemis empruntent des raccourcis spécifiques, grâce à l’utilisation de NavModifierVolume. Chaque ennemi a son propre comportement, vitesse et résistance.",
           "image": " "
         }
       ],
       "Développement C++": [
         {
-          "text": "Le développement des tourelles en C++ a clairement été un des points qui m’a fait progresser. Pour créer ces défenses, j’ai créé un Blueprint Actor qui prend en Parent Class l’Actor C++ de ma tourelle. Voici comment le script fonctionne: pour commencer, je récupère les composants du Mesh et de la sphere Collision déjà présents dans la scène. Le type de tourelle (simple, explosive...) détermine ses stats : dégâts, portée et mesh. À chaque frame, si une cible est détectée dans la sphere Collision, la tourelle s’oriente vers elle et tire selon un cooldown.",
+          "text": "Le développement des tourelles en C++ a clairement été un des points qui m’a fait progresser. Pour créer ces défenses, j’ai créé un Blueprint Actor qui prend en Parent Class l’Actor C++ de ma tourelle. Voici comment le script fonctionne: je récupère les composants du Mesh et de la sphere Collision déjà présents dans la scène. Le type de tourelle (simple, explosive...) détermine ses stats : dégâts, portée et mesh. À chaque frame, si une cible est détectée dans la sphere Collision, la tourelle s’oriente vers elle et tire selon un cooldown.",
           "image": " "
         }
       ],
       "Interface utilisateur et feedbacks": [
         {
-          "text": "J’ai affiché la vie du château dans le coin supérieur gauche de l’écran, j’ai voulu changer d’un style de barre de vie classique et j’ai opté pour un château qui change de couleur, jusqu’à devenir tout noir quand c’est perdu. J’ai bien sûr ajouté sur chaque ennemi une barre de vie juste au-dessus de leur tête. Pour la gestion des tourelles, j’ai créé un menu d’achat interactif en cliquant sur un emplacement vide, afin de choisir quelle tourelle le joueur veut acheter en fonction des ressources qu’il dispose.",
+          "text": "L’interface montre la vie du château via un visuel évolutif. Chaque ennemi affiche sa barre de vie. Un menu interactif permet de choisir les tourelles à construire selon les ressources du joueur.",
           "image": " "
         }
       ],
       "Défis techniques": [
         {
-          "text": "L’un des plus gros défis que j’ai eus sur ce projet a été de mettre en place le pathfinding : il fallait que les ennemis suivent le bon trajet, tout en prenant en compte des statistiques comme la vitesse ou les points de vie. Le deuxième point technique a été bien sûr le développement des tourelles en C++. Je dirais que ce n’est pas la complexité du contenu qui m’a posé problème, mais plutôt le manque de temps.",
+          "text": "Les plus grands défis ont été la mise en place du pathfinding dynamique et le développement des tourelles en C++. La difficulté résidait plus dans la gestion du temps que dans la complexité technique.",
           "image": " "
         }
       ]
@@ -357,8 +349,7 @@
       }
     ],
     "images": [
-      "img/towerdefense.png",
-      "img/towerdefense2.png"
+      "img/towerdefense.png"
     ],
     "videos": []
   },
@@ -378,30 +369,30 @@
       "role": "Gameplay Programmer"
     },
     "about_project": [
-      "Space Cleaners a été développé lors du Global Game Jam 2024 sur le thème « Make Me Laugh ». L'objectif était de créer une expérience coopérative à la fois amusante et chaotique, où deux joueurs travaillent ensemble pour réparer une station spatiale à l'aide d'outils absurdes. Les joueurs sont physiquement reliés par une corde, ce qui les oblige à synchroniser leurs mouvements. L'un des joueurs est responsable des réparations, tandis que l'autre doit fabriquer et fournir les outils nécessaires. J'ai collaboré avec un autre programmeur de jeu, tandis que le reste de l'équipe s'est concentré sur la direction artistique et la conception sonore. Nous avons développé le jeu en un seul week-end, mais il n’a pas été achevé dans le week-end. Il n’était que partiellement jouable. Avec l'accord de mon équipe, j'ai travaillé seul pendant cinq jours supplémentaires pour finir le jeu et le rendre jouable pour une présentation lors de la journée portes ouvertes de notre école."
+      "Space Cleaners a été développé lors de la Global Game Jam 2024 sur le thème « Make Me Laugh ». Le jeu offre une expérience coopérative amusante et chaotique. Deux joueurs, reliés par une corde, doivent réparer une station spatiale. L’un crée des outils, l’autre effectue les réparations. Nous avons développé ce jeu en un week-end, mais il n’était pas entièrement fonctionnel. Avec l’autorisation de l’équipe, j’ai poursuivi le travail seul pendant cinq jours pour le rendre présentable à la journée portes ouvertes de l’école."
     ],
     "development": {
       "Mécanique de gameplay": [
         {
-          "text": "Le jeu est basé sur un système coopératif asymétrique. D’un côté, il y a la station, et, de l’autre, l’espace avec les satellites. Le joueur dans la station a comme mécanique le craft d’objet permettant la réparation des satellites. Pour cela, il possède un stock illimité d’objets qu’ils récupèrent en interagissant avec un stock. Côté technique, j’ai utilisé une simple Line Trace pour ce personnage. Il peut aussi interagir avec la poubelle afin de vider sa main de l’objet inutile qu’il a pris, avec la table de craft pour crafter les objets de réparation en quelques secondes et enfin avec le sas de décompression pour envoyer l’objet dans l’espace à l’autre joueur. Le joueur dans l’espace doit récupérer les objets donnés par celui dans la station et réparer les dégâts sur les différents éléments dans le temps imparti. Ajouté à cela, une corde accrochée aux deux personnages ajoute un défi supplémentaire, car les mouvements doivent être soigneusement coordonnés pour éviter de se gêner mutuellement.",
-          "image": "img/spacecleaners.png"
+          "text": "Le jeu repose sur un système coopératif asymétrique : un joueur reste dans la station pour crafter les outils de réparation, l’autre évolue dans l’espace pour les utiliser. Le joueur dans la station interagit avec différents éléments : un stock infini, une poubelle, une table de craft, et un sas pour envoyer les objets. De son côté, le joueur dans l’espace doit collecter les objets et réparer les dommages dans un délai imparti. La corde entre les deux ajoute un défi de coordination constant.",
+          "image": "img/spacecleaners2.png"
         }
       ],
       "Physique et interaction avec le joueur": [
         {
-          "text": "L'un des principaux aspects du développement a été la mise en place d'une corde dynamique reliant les deux joueurs. Cette corde réagit aux mouvements et aux forces appliqués, obligeant les joueurs à anticiper leurs actions pour éviter de s'emmêler ou de se ralentir l'un l'autre en apesanteur. Plusieurs ajustements ont été nécessaires pour assurer un comportement stable et fluide tout en maintenant l'aspect comique du jeu.",
+          "text": "Une corde dynamique relie les deux personnages. Elle réagit aux mouvements et aux forces, forçant les joueurs à coordonner leurs actions pour éviter de se gêner ou de s’emmêler, surtout en apesanteur. Nous avons dû apporter plusieurs modifications afin que le fonctionnement soit stable, fluide et drôle.",
           "image": " "
         }
       ],
       "Multijoueur local et gestion des joueurs": [
         {
-          "text": "Je me suis occupé en grande partie des joueurs et de leurs mécaniques. Le jeu a été conçu pour deux joueurs sur le même écran, ce qui a représenté un défi technique puisqu'il s'agissait de notre première expérience en matière de multijoueur local. L'une de mes principales difficultés a été de m’assurer que les deux joueurs n'apparaissent pas au même endroit au début de la partie. Cette logique est entièrement gérée par un script que j’ai construit dans le GameMode du jeu, ce qui garantit un placement optimal dès le début de la partie. La complexité a été accrue par le fait que chaque joueur évolue dans un environnement différent : l'un se déplace à l'intérieur de la station spatiale avec une gravité normale, tandis que l'autre flotte en apesanteur à l'extérieur. Cette asymétrie m’a posé assez de travail supplémentaire sur les contrôles et les interactions.",
+          "text": "Le jeu a été conçu pour que deux personnes puissent y jouer simultanément, ce qui représentait une première pour nous. J’ai utilisé un script dans le GameMode pour positionner les joueurs initialement, m’assurant ainsi qu’ils ne commencent pas au même endroit. Chaque joueur évolue dans un environnement différent (gravité vs apesanteur), ce qui m’a obligé à travailler spécifiquement sur les commandes et les interactions.",
           "image": " "
         }
       ],
       "Défis techniques": [
         {
-          "text": "L'un des défis que j’ai eus a donc été la conception des évents de réparation dans l’espace. C’était une des premières fois que j’utilisais un timer pour afficher le temps dans un projet et donc au début, ce fut assez complexe à mettre en place. Grâce à ce projet, j’ai su bien m’entrainer sur cela et j’ai pu mettre en place des évents après un certain timing défini. J'ai également eu des difficultés sur les contrôles des personnages et leurs spawns, étant donné que je n'avais jamais fait cela, j'ai dû faire beaucoup de recherche. Nous avons eu des difficultés, notamment avec la corde dynamique, mais je ne me suis pas personnellement concentré sur cette partie. Je me suis occupé en priorité sur les mécaniques de fabrication et de craft d’objets de réparation.",
+          "text": "L’un des défis principaux a été de créer des évents de réparation avec des timers, une première pour moi. Ce projet m’a permis de m’exercer efficacement sur cette mécanique. J’ai aussi dû apprendre à gérer le spawn des joueurs et leurs contrôles. Bien que la corde ait posé des difficultés, je me suis concentré sur les mécaniques de craft et d’interaction.",
           "image": " "
         }
       ]
@@ -435,7 +426,6 @@
     ],
     "images": [
       "img/spacecleaners.png",
-      "img/spacecleaners2.png",
       "img/spacecleaners3.png"
     ],
     "videos": []
