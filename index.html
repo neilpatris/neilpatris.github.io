@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./css/general.css"/>
     <link rel="stylesheet" href="./css/index.css"/>
 
+    <script src="js/translations.js"></script>
     <script src="js/language.js"></script>
     <script src="js/cookies.js"></script>
 </head>
@@ -31,8 +32,8 @@
         <!-- Menu de navigation -->
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
           <ul class="navbar-nav mx-auto">
-            <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="allprojects.html">Projects</a></li>
+            <li class="nav-item"><a class="nav-link active" data-i18n="home" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" data-i18n="projects" href="allprojects.html">Projects</a></li>
           </ul>
         
           <!-- Lang Button à droite -->
@@ -48,12 +49,12 @@
   <main>
     <!--  Header  -->
     <div class="heading text-center d-flex flex-column align-items-center">
-      <p class="container header-title">Hello !</p>
-      <p class="container heade-main">
+      <p class="container header-title" data-i18n="hello">Hello !</p>
+      <p class="container heade-main" data-i18n="intro">
         My name is Neil and I'm a <strong>Game Programmer student</strong> at <strong>CGAcademy</strong>.<br>
         I'm aiming for a career as a <strong>Gameplay Programmer</strong>, but I'm open to all other experiences.
       </p>
-      <a class="btn btn-outline-dark" href="allprojects.html">My Projects</a>
+      <a class="btn btn-outline-dark" href="allprojects.html" data-i18n="myProjects">My Projects</a>
     </div>
 
     <div class="custom-shape-divider-top-1711280432">
@@ -63,10 +64,12 @@
     </div>
 
     <div class="contact-header">
-      <h1>Get in Touch</h1>
-      <p>I am currently looking for an <strong>internship</strong> and <strong>I am available now</strong>. If you are interested in my profile, please do not hesitate to <strong>contact me</strong> via the platforms below.</p>
+      <h1 data-i18n="contactTitle">Get in Touch</h1>
+      <p data-i18n="contactText">
+        I am currently looking for an <strong>internship</strong> and <strong>I am available now</strong>. If you are interested in my profile, please do not hesitate to <strong>contact me</strong> via the platforms below.
+      </p>
     </div>
-
+    
     <!--  Contact  -->
     <div class="container contact-container">
       <div class="row justify-content-center align-items-center">
@@ -74,8 +77,10 @@
           <i class="bi bi-linkedin contact-icon"></i>
           <br>
           <a href="https://www.linkedin.com/in/neil-patris-22a960195/" target="_blank" class="btn custom-btn">
-            <i class="bi bi-linkedin"></i> Connect on LinkedIn
+            <i class="bi bi-linkedin"></i>
+            <span data-i18n="linkedIn">Connect on LinkedIn</span>
           </a>
+          
         </div>
         
         <div class="col-md-1 d-flex justify-content-center">
@@ -87,19 +92,20 @@
           <br>
           <p>neil.patris@gmail.com</p>
           <a href="mailto:neil.patris@gmail.com" class="btn custom-btn">
-            <i class="bi bi-envelope"></i> Send an Email
-          </a>
+            <i class="bi bi-envelope"></i>
+            <span data-i18n="email">Send an Email</span>
+          </a>          
         </div>
       </div>
     </div>
     
   </main>
 
-  <div id="cookie-banner" class="cookie-banner">
-    <p>This site uses cookies to enhance your experience. <a href="privacy-policy.html">Learn more</a></p>
+  <div id="cookie-banner" class="cookie-banner" data-i18n="cookiesText">
+    <p>This site uses cookies to enhance your experience. <a href="privacy-policy.html" data-i18n="cookiesMore">Learn more</a></p>
     <div>
-      <button id="accept-cookies">Accept</button>
-      <button id="reject-cookies">Reject</button>
+      <button id="accept-cookies" data-i18n="accept">Accept</button>
+      <button id="reject-cookies" data-i18n="reject">Reject</button>
     </div>
   </div>  
 

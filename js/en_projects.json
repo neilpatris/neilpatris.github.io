@@ -18,37 +18,37 @@
       "As part of a student game combining rogue-lite and management, this procedural dungeon project was developed using Unity. The dungeon is randomly generated when the player decides to explore the depths. To achieve this, I opted for a modular approach, starting by designing the large rooms, followed by smaller rooms linked by connectors. This system has been designed to be easily configurable via the editor, which will allow it to be adapted to the needs of other team members and make it easier to update."
     ],
     "development": {
-      "Système de portes dynamiques": [
+      "Dynamic door system": [
         {
           "text": "After creating the doors, I set up a system for generating the main path through the dungeon using a Stack. The first room is positioned at the start, then each additional room is connected to a free door of the previous one by a connector, until the desired number (adjustable) is reached. The last room is always a final room chosen from a list of prefabs.",
           "image": "img/dungeonGenerateDoor.png"
         }
       ],
-      "Génération des salles principales": [
+      "Main room generation": [
         {
           "text": "After installing the doors, I started creating the main dungeon path using a stack structure to make it easier to recover the last room in the event of a collision. I started by positioning the first room at the origin (Vector3.zero). Then, for each new room, I chose an available door in the previous room, added a connector to it, then aligned the new room with this connector. I repeat this process until I have the desired number of rooms for the dungeon (configurable). The last room on the main path is always a final room chosen from a specific list of Prefabs.",
           "image": "img/dungeonGenerateInterface.png"
         }
       ],
-      "Génération des salles secondaires": [
+      "Generating secondary rooms": [
         {
           "text": "Once the main rooms have been generated, I go through the stack in reverse to add secondary rooms. For each room, if doors are available, I connect one or more secondary rooms to it, according to a configurable random number. One case that has not yet been resolved is that of secondary rooms with several entrances, which should ideally form a single alternative path.",
           "image": "img/dungeonGenerateEx2.png"
         }
       ],
-      "Placement intelligent et résolution des collisions": [
+      "Intelligent placement and collision resolution": [
         {
           "text": "To prevent overlaps, each positioning attempt uses a Physics.OverlapBox. In the event of a collision, the room or connector is deleted, along with the last room positioned. A final room is then added. This system works, but still doesn't always respect the defined number of main rooms. I'm continuing to work on improving this point.",
           "image": ""
         }
       ],
-      "Interface d’édition personnalisée": [
+      "Customized editing interface": [
         {
           "text": "I have developed an interface in the Unity inspector to group together all the parameters for the dungeon generator. It lets you configure lists of prefabs (base rooms, final rooms, connectors), generation containers and maze size parameters. The « Process All Room Prefabs » button automatically creates doors for new rooms. This interface simplifies testing and adjustments during production.",
           "image": " "
         }
       ],
-      "Défis techniques": [
+      "Technical challenges": [
         {
           "text": "Automatically positioning the doors was a major challenge. It was necessary to correctly detect usable edges, avoid obstacles, orientate the doors and deal with special cases. The choice of a stack system to organise the layout of the rooms enabled collisions to be managed effectively, although the complete resolution of conflicts during placement remains a challenge that is still being optimised.",
           "image": " "
@@ -85,25 +85,25 @@
       "The main challenge of the project was to create a procedurally generated infinite track of progressively increasing difficulty. As I was the only prog, I managed all aspects of the game's programming. Meanwhile, the rest of my team concentrated on the artistic aspect of the game and on improving the physics controller."
     ],
     "development": {
-      "Conception du contrôleur": [
+      "Controller design": [
         {
           "text": "After exploring several ideas, we settled on a system inspired by the movement of a sledge. The controller was made from cardboard, with two side cords attached to a joystick. Several iterations were needed to adjust the sensitivity of the movements and make the controller both robust and functional.", 
           "image": " "
         }
       ],
-      "Génération de pistes procédurales": [
+      "Generation of procedural tracks": [
         {
           "text": "One of my biggest technical challenges was to design an infinite, procedurally-generated ski run. To achieve this, I set up a system of reusable ski slope blocks: once the player passes a block, it is repositioned at the front of the slope. This mechanism creates an infinite effect, but also optimises performance by avoiding unnecessary blocks. I've also developed a system for randomly generating obstacles on these blocks, with progressive difficulty: the further the player advances, the more numerous the obstacles become.",
           "image": " "
         }
       ],
-      "Simulation glissante et gestion de la vitesse": [
+      "Sliding simulation and speed management": [
         {
           "text": "To get the feeling of sliding, I've implemented a progressive speed model. The further the player travels, the faster the sled accelerates. This also increases the difficulty of the game and pushes the player to fall. The number of obstacles also increases with distance.",
           "image": " "
         }
       ],
-      "Interface utilisateur et feedbacks": [
+      "User interface and feedback": [
         {
           "text": "The user interface has been designed to provide clear, relevant information throughout the game. A real-time distance counter allows players to track their progress, which also serves as the final score in the leaderboard. To make the game more immersive, we decided to add visual effects, such as snowfall, and the artists created a winter environment of ski slopes, mountains...",
           "image": " "
@@ -151,19 +151,19 @@
       "The aim of this academic project was to recreate the mechanics of a platform game. It was also a way of putting my first Unreal Engine courses into practice through a real project. To do this, I took inspiration from the Crash Bandicoot and Fall Guys games to create a fast-paced platform game with various static and dynamic traps, moving platforms, precise jumps, bounces, etc..."
     ],
     "development": {
-      "Personnage et contrôle": [
+      "Character and control": [
         {
           "text": "For the character and animations, I set up a State Machine to correctly manage the animations with the values and transitions between them of my BP_Character. For the controls, I used a Mapping Context, and positioned a third-person camera.",
           "image": " "
         }
       ],
-      "Mécanique de gameplay": [
+      "Gameplay mechanics": [
         {
           "text": "I've added several mechanics to make the game more interesting. There are static traps that are activated by using Timelines to play a slight movement animation or Unreal's Box Collisions. I've also added moving platforms and a giant stinging ball that chases the player using Component InterpToMovement to define the points at which they pass. I've also added a treadmill that pushes the player using Actor Offset and Dynamic Materials to improve the visual aspect, precise jumps that require good timing, trampolines and destructible crates that slow you down when you hit them. Next, I've placed an ice zone where friction is at 0 and the player slides along while dodging traps. Finally, the exit door opens with a lever to activate, which adds a little puzzle element to the game.",
           "image": " "
         }
       ],
-      "Interface utilisateur et son": [
+      "User interface and sound": [
         {
           "text": "The interface includes a main menu, a pause and an end screen. A very low life bar makes the game punishing, although some traps do not inflict instant death. Sound effects indicate when traps are hit, and dynamic music accompanies the race.",
           "image": " "
@@ -221,25 +221,25 @@
       "The aim of this academic project was to create a 2D platform game in Unity, but with one particular constraint: not to use Unity's built-in physics engine. It was also a way of putting my first courses on Unity into practice through a real project."
     ],
     "development": {
-      "Mécanique de gameplay": [
+      "Gameplay mechanics": [
         {
           "text": "All the gameplay in the game was created entirely without the physical forces of Unity. To achieve this, I used Raycasts to detect the environment around the character. I implemented Wall Jump using Raycasts to detect walls and authorise an extra jump when the player comes into contact with a wall. I've developed an aerial propulsion mechanic so that it directly modifies the character's position in order to lift them into the air and recreate a floating effect. Other trap mechanics have been implemented, such as spikes that emerge from the ground, saws, falling platforms, etc.",
           "image": " "
         }
       ],
-      "Contrôleur de personnage personnalisé": [
+      "Customised character controller": [
         {
           "text": "The character is entirely managed by a central script, CharacterController2D, which is designed to separate responsibilities: user input, movement mechanics, collisions, animations and life management. This organisation made it easier for me to add new functionality without modifying the main controller.",
           "image": " "
         }
       ],
-      "Transition de niveau and Checkpoints": [
+      "Level transition and Checkpoints": [
         {
           "text": "The game has two levels with fluid transitions, while retaining the player's specific parameters. I've set up a system of checkpoints to allow the player to respawn after a failure, using ‘PlayerPrefs’ to memorise positions, keep important character data and prevent resets during scene changes.",
           "image": " "
         }
       ],
-      "Défis techniques": [
+      "Technical challenges": [
         {
           "text": "The biggest technical challenge I had was the Wall Jump. With no physics engine, I had to find a stable method based solely on Raycasts to manage the jump reset and direction. The checkpoint system also required a lot of thought. I had to make sure that the checkpoints couldn't be activated several times when you passed through them, and that the player's progress was maintained between levels.",
           "image": " "
@@ -293,31 +293,31 @@
       "I coded all the turrets, each with its own unique characteristics (range, damage, cadence, etc.). I also implemented enemy pathfinding and a top-down camera system with ZQSD controls and a point & click turret placement interface."
     ],
     "development": {
-      "Mécanique de gameplay": [
+      "Gameplay mechanics": [
         {
           "text": "I set up a point & click mechanic to allow the player to buy and place turrets. Each turret, coded in C++, has unique characteristics (range, damage, rate of fire). A system of progressive waves of enemies increases the difficulty.",
           "image": "img/towerdefense2.png"
         }
       ],
-      "IA ennemie et pathfinding": [
+      "Enemy AI and pathfinding": [
         {
           "text": "Enemies follow a predefined path thanks to pathfinding. Certain types of enemy take specific shortcuts, thanks to the use of NavModifierVolume. Each enemy has its own behaviour, speed and resistance.",
           "image": " "
         }
       ],
-      "Développement C++": [
+      "C++ development": [
         {
           "text": "Developing the turrets in C++ was clearly one of the points that helped me progress. To create these defences, I created a Blueprint Actor which takes the C++ Actor of my turret as Parent Class. Here's how the script works: I get the Mesh and Collision sphere components already in the scene. The type of turret (simple, explosive...) determines its stats: damage, range and mesh. Each frame, if a target is detected in the Collision sphere, the turret turns towards it and fires according to a cooldown.",
           "image": " "
         }
       ],
-      "Interface utilisateur et feedbacks": [
+      "User interface and feedback": [
         {
           "text": "The interface shows the life of the castle via an evolving visual. Each enemy displays its life bar. An interactive menu lets you choose which turrets to build according to the player's resources.",
           "image": " "
         }
       ],
-      "Défis techniques": [
+      "Technical challenges": [
         {
           "text": "The biggest challenges were implementing dynamic pathfinding and developing the turrets in C++. The difficulty lay more in time management than in technical complexity.",
           "image": " "
@@ -372,25 +372,25 @@
       "Space Cleaners was developed at the Global Game Jam 2024 under the theme « Make Me Laugh ». The game offers a fun and chaotic cooperative experience. Two players, linked by a rope, have to repair a space station. One creates the tools, the other carries out the repairs. We developed this game over a weekend, but it wasn't fully functional. With the team's permission, I worked on it alone for five days to make it presentable for the school's open day."
     ],
     "development": {
-      "Mécanique de gameplay": [
+      "Gameplay mechanics": [
         {
           "text": "The game is based on an asymmetrical cooperative system: one player stays in the station to craft repair tools, while the other travels through space to use them. The player in the station interacts with various elements: an infinite stockpile, a dustbin, a crafting table and an airlock for sending items. The player in space, meanwhile, has to collect the items and repair the damage within a set time limit. The rope between the two adds a constant coordination challenge.",
           "image": "img/spacecleaners2.png"
         }
       ],
-      "Physique et interaction avec le joueur": [
+      "Physics and interaction with the player": [
         {
           "text": "A dynamic rope connects the two characters. It reacts to movements and forces, forcing players to coordinate their actions to avoid getting in each other's way or tangling up, especially in zero gravity. We had to make a number of changes to ensure that it worked in a stable, fluid and fun way.",
           "image": " "
         }
       ],
-      "Multijoueur local et gestion des joueurs": [
+      "Local multiplayer and player management": [
         {
           "text": "The game was designed so that two people could play simultaneously, which was a first for us. I used a script in GameMode to position the players initially, ensuring that they didn't start in the same place. Each player evolves in a different environment (gravity vs. weightlessness), so I had to work specifically on controls and interactions.",
           "image": " "
         }
       ],
-      "Défis techniques": [
+      "Technical challenges": [
         {
           "text": "One of the main challenges was to create repair vents with timers, a first for me. This project allowed me to practise this mechanic effectively. I also had to learn how to manage the players' spawn and their controls. Although the rope posed some difficulties, I concentrated on the crafting and interaction mechanics.",
           "image": " "
@@ -449,19 +449,19 @@
       "This project was developed during the Global Game Jam 2025 on the theme of ‘Bubble’. The aim was to create a game focusing on movements based on the physics of a ball to link the project to the Bubble theme. The player has to control a fish trapped in a rolling aquarium, which requires good control of inertia. My role in the team was exclusively programming."
     ],
     "development": {
-      "Mécanique de gameplay": [
+      "Gameplay mechanics": [
         {
           "text": "So I created the ball using a BP_Pawn rather than a BP_Character. To get the best possible result, I did a lot of playtesting to fine-tune the physics of the ball and the way it was controlled. As I was lucky enough to be on site, I received a lot of feedback from different people at the Jam, which helped me get something really good. Each movement affects the stability of the jar and its manoeuvrability. The player also has the option of jumping.",
           "image": " "
         }
       ],
-      "Assemblage du contrôleur": [
+      "Assembling the controller": [
         {
           "text": "I had a few complications and, what's more, I didn't have enough time to finish it. I had to make the ball turn on itself to keep the physics of the movement and keep the fish upright with the water in the jar. I didn't manage to put all the animations of the fish in the jar in time, but I did my best in time.",
           "image": " "
         }
       ],
-      "Défis techniques": [
+      "Technical challenges": [
         {
           "text": "One of the main challenges was to ensure that the physics of a ball were intuitive and responsive so that the player could control it. The movements of the fishbowl had to be realistic while remaining playable and attractive.",
           "image": " "

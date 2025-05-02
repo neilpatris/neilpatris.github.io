@@ -13,6 +13,8 @@
     
     <link rel="stylesheet" href="./css/general.css"/>
     <link rel="stylesheet" href="./css/privacy-policy.css"/>
+    <script src="js/translations.js"></script>
+    <script src="js/language.js"></script>
     <script src="js/cookies.js" defer></script>
 </head>
 <body>
@@ -25,8 +27,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="allprojects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" data-i18n="home" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" data-i18n="projects" href="allprojects.html">Projects</a></li>
                 </ul>
             </div>
         </div>
@@ -34,13 +36,13 @@
 
     <!-- MAIN CONTENT -->
     <main class="container privacy-container">
-        <h1>Privacy Policy</h1>
-        <p>Last updated: March 2025</p>
+        <h1 data-i18n="privacyTitle">Privacy Policy</h1>
+        <p data-i18n="privacyUpdate">Last updated: March 2025</p>
 
-        <h2>1. Introduction</h2>
-        <p>Welcome to Neil Patris’ Portfolio. Your privacy is important to us. This page explains how we use cookies and protect your data.</p>
+        <h2 data-i18n="section1">1. Introduction</h2>
+        <p data-i18n="privacyIntro">Welcome to Neil Patris’ Portfolio. Your privacy is important to us. This page explains how we use cookies and protect your data.</p>
 
-        <h2>2. Cookies Usage</h2>
+        <h2 data-i18n="section2">2. Cookies Usage</h2>
         <p>This website only uses essential cookies to improve user experience.</p>
         <ul>
             <li><strong>Essential Cookies:</strong> Required for website functionality.</li>
@@ -48,10 +50,10 @@
         </ul>
         <button id="reset-cookies" class="btn btn-danger">Reset Cookie Preferences</button>
 
-        <h2>3. Third-Party Services</h2>
+        <h2 data-i18n="section3">3. Third-Party Services</h2>
         <p>We do not share or sell your personal data. If analytics or third-party tracking are used in the future, they will require consent.</p>
 
-        <h2>4. Contact</h2>
+        <h2 data-i18n="section4">4. Contact</h2>
         <p>If you have any concerns, you can contact us at <a href="mailto:neil.patris@gmail.com">neil.patris@gmail.com</a></p>
     </main>
 

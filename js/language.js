@@ -24,5 +24,12 @@
         setLanguage(currentLang === "fr" ? "en" : "fr");
       });
     }
+    
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      const value = window.translations?.[currentLang]?.[key];
+      if (value) el.innerHTML = value;
+    });
   });
+
 })();
