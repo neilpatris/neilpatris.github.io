@@ -1,6 +1,6 @@
 # Personal Web Site
 
-My portfolio as a Game Programmer : https://neil-patris.be
+My portfolio as a Game Programmer.
 
 ## About
 
